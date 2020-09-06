@@ -4,9 +4,6 @@
     "autoload": {
         "psr-4": {
             "App\\AcfObjects\\": "src/"
-        },
-        "files": [
-            "src/acf-objects.php"
-        ]
+        }
     }
 }
