@@ -1,0 +1,12 @@
+{
+    "name": "tombroucke/acf-objects",
+    "description": "Make get_field return objects",
+    "autoload": {
+        "psr-4": {
+            "App\\AcfObjects\\": "src/"
+        },
+        "files": [
+            "src/acf-objects.php"
+        ]
+    },
+}
