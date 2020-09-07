@@ -43,4 +43,12 @@ class Link {
 		$this->$param = $value;
 
 	}
+
+	public function array() {
+		return array(
+			'url'    => $this->url,
+			'target' => $this->target,
+			'title'  => $this->title,
+		);
+	}
 }
