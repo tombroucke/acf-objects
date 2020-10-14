@@ -6,7 +6,7 @@ class Group {
 
 	protected $group;
 
-	public function __construct( array $group ) {
+	public function __construct( $group ) {
 
 		$this->group = $group;
 
@@ -14,7 +14,10 @@ class Group {
 
 	public function get( string $param ) {
 
-		return $this->group[ $param ];
+        if( isset( $this->group[ $param ] ) ) {
+            return $this->group[ $param ];
+        }
+		return false;
 
 	}
 }
