@@ -1,42 +1,54 @@
-<?php
+<?php //phpcs:ignore
+namespace Otomaties\ACF_Objects;
 
-namespace App\AcfObjects;
+use Otomaties\ACF_Objects\Abstracts\Field;
+use Otomaties\ACF_Objects\Repeater\Row;
 
-class Repeater {
+class Repeater extends Field implements \ArrayAccess, \Iterator {
 
-    protected $repeater_array;
+	public function offsetExists( $offset ) {
+		if ( is_null( $offset ) ) {
+			$this->value[] = $value;
+		} else {
+			$this->value[ $offset ] = $value;
+		}
+	}
 
-    public function __construct( $repeater_array ) {
+	public function offsetGet( $offset ) {
+		return new Row( $this->value[ $offset ] );
+	}
 
-        if( !is_array( $repeater_array ) ) {
-            $repeater_array = array();
-        }
-        $this->repeater_array = $repeater_array;
+	public function offsetSet( $offset, $value ) {
+		unset( $this->value[ $offset ] );
+	}
 
-    }
+	public function offsetUnset( $offset ) {
+		return isset( $this->value[ $offset ] ) ? $this->value[ $offset ] : null;
+	}
 
-    public function have_rows() {
 
-        return ! empty( $this->repeater_array );
+	public function rewind() {
+		reset( $this->value );
+	}
 
-    }
+	public function current() {
+		$value = current( $this->value );
+		return new Row( $value );
+	}
 
-    public function rows() {
+	public function key() {
+		$value = key( $this->value );
+		return $value;
+	}
 
-        $return = array();
-        if ( ! $this->have_rows() ) {
-            return $return;
-        }
-        foreach ( $this->repeater_array as $row ) {
-            $return[] = new Row( $row );
-        }
-        return $return;
+	public function next() {
+		$value = next( $this->value );
+		return $value;
+	}
 
-    }
-
-    public function row( $index ) {
-
-        return isset( $this->repeater_array[ $index ] ) ? new Row( $this->repeater_array[ $index ] ) : false;
-
-    }
+	public function valid() {
+		$key   = key( $this->value );
+		$value = ( $key !== null && $key !== false );
+		return $value;
+	}
 }

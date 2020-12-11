@@ -1,39 +1,27 @@
-<?php
+<?php //phpcs:ignore
+namespace Otomaties\ACFObjects;
 
-namespace App\AcfObjects;
+use App\ACF_Objects\Abstracts\Field;
 
-class Image {
-
-	protected $ID;
-	private $default = false;
-
-	public function __construct( $image ) {
-
-		if ( is_int( $image ) ) {
-			$this->ID = $image;
-		} else if ( is_array( $image ) ) {
-			$this->ID = $image['ID'];
-		}
-
-	}
+class Image extends Field {
 
 	public function get_ID() {
-
-		return $this->ID;
-
+        if( ! isset( $this->value['ID'] ) ) {
+            return 0;
+        }
+		return $this->value['ID'];
 	}
 
-	public function default() {
-
-		return $this->default;
-
+	public function __toString() {
+		return $this->url();
 	}
 
-	public function set_default( string $url ) {
+	public function url( string $size = 'thumbnail' ) {
 
-		$this->default = esc_url( $url );
+        $url = wp_get_attachment_image_url( $this->get_ID(), $size );
+		return $url;
 
-	}
+    }
 
 	public function image( string $size = 'thumbnail' ) {
 
@@ -41,13 +29,4 @@ class Image {
 
 	}
 
-	public function url( string $size = 'thumbnail' ) {
-
-		$url = wp_get_attachment_image_url( $this->get_ID(), $size );
-		if ( ! $url ) {
-			$url = $this->default();
-		}
-		return $url;
-
-	}
 }

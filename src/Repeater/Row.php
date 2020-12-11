@@ -1,0 +1,16 @@
+<?php //phpcs:ignore
+namespace Otomaties\ACF_Objects\Repeater;
+
+class Row {
+
+    protected $row;
+
+    public function __construct( $row = array() ) {
+        $this->row = $row;
+    }
+
+    public function get( $key ) {
+        return $this->row[$key];
+    }
+
+}
