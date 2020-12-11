@@ -3,20 +3,23 @@ namespace Otomaties\AcfObjects;
 
 use Otomaties\AcfObjects\Abstracts\Field;
 
-class Gallery extends Field implements \ArrayAccess, \Iterator  {
+class Gallery extends Field implements \ArrayAccess, \Iterator {
 
-    public function images() {
-        return array_map(function($image_array){
-            return new Image( $image_array, $this->post_id, array() );
-        }, $this->value);
-    }
+	public function images() {
+		return array_map(
+			function( $image_array ) {
+				return new Image( $image_array, $this->post_id, array() );
+			},
+			$this->value
+		);
+	}
 
 	public function value() {
-        if( is_array( $this->value ) ) {
-            return $this->value;
-        }
+		if ( is_array( $this->value ) ) {
+			return $this->value;
+		}
 		return array();
-    }
+	}
 
 	public function offsetExists( $offset ) {
 		if ( is_null( $offset ) ) {
@@ -27,7 +30,8 @@ class Gallery extends Field implements \ArrayAccess, \Iterator  {
 	}
 
 	public function offsetGet( $offset ) {
-		return new Image( $this->value[ $offset ], $this->post_id, array() );
+		$image = ( isset( $this->value[ $offset ] ) ? $this->value[ $offset ] : 0 );
+		return new Image( $image, $this->post_id, array() );
 	}
 
 	public function offsetSet( $offset, $value ) {
@@ -40,9 +44,9 @@ class Gallery extends Field implements \ArrayAccess, \Iterator  {
 
 
 	public function rewind() {
-        if( ! empty( $this->value() ) ) {
-            reset( $this->value );
-        }
+		if ( ! empty( $this->value() ) ) {
+			reset( $this->value );
+		}
 	}
 
 	public function current() {
@@ -61,11 +65,11 @@ class Gallery extends Field implements \ArrayAccess, \Iterator  {
 	}
 
 	public function valid() {
-        $value = null;
-        if( ! empty( $this->value() ) ) {
-            $key   = key( $this->value );
-            $value = ( $key !== null && $key !== false );
-        }
+		$value = null;
+		if ( ! empty( $this->value() ) ) {
+			$key   = key( $this->value );
+			$value = ( $key !== null && $key !== false );
+		}
 		return $value;
 	}
 

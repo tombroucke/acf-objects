@@ -7,11 +7,11 @@ use Otomaties\AcfObjects\Repeater\Row;
 class Repeater extends Field implements \ArrayAccess, \Iterator {
 
 	public function value() {
-        if( is_array( $this->value ) ) {
-            return $this->value;
-        }
+		if ( is_array( $this->value ) ) {
+			return $this->value;
+		}
 		return array();
-    }
+	}
 
 	public function offsetExists( $offset ) {
 		if ( is_null( $offset ) ) {
@@ -22,7 +22,8 @@ class Repeater extends Field implements \ArrayAccess, \Iterator {
 	}
 
 	public function offsetGet( $offset ) {
-		return new Row( $this->value[ $offset ] );
+		$row = isset( $this->value[ $offset ] ) ? $this->value[ $offset ] : array();
+		return new Row( $row );
 	}
 
 	public function offsetSet( $offset, $value ) {
@@ -35,9 +36,9 @@ class Repeater extends Field implements \ArrayAccess, \Iterator {
 
 
 	public function rewind() {
-        if( ! empty( $this->value() ) ) {
-            reset( $this->value );
-        }
+		if ( ! empty( $this->value() ) ) {
+			reset( $this->value );
+		}
 	}
 
 	public function current() {
@@ -56,11 +57,11 @@ class Repeater extends Field implements \ArrayAccess, \Iterator {
 	}
 
 	public function valid() {
-        $value = null;
-        if( ! empty( $this->value() ) ) {
-            $key   = key( $this->value );
-            $value = ( $key !== null && $key !== false );
-        }
+		$value = null;
+		if ( ! empty( $this->value() ) ) {
+			$key   = key( $this->value );
+			$value = ( $key !== null && $key !== false );
+		}
 		return $value;
 	}
 }

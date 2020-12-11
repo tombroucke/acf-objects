@@ -10,10 +10,9 @@ add_filter(
 		$class = '\\Otomaties\\AcfObjects\\' . ucfirst( $field['type'] );
 		if ( class_exists( $class ) ) {
 			$value = new $class( $value, $post_id, $field );
-        }
+		}
 		return $value;
-    }
-    ,
-    99999999,
-    3
+	},
+	99999999,
+	3
 );

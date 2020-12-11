@@ -5,41 +5,50 @@ use Otomaties\AcfObjects\Abstracts\Field;
 
 class Image extends Field {
 
+	private $attributes = array();
+
 	public function get_ID() {
-        if( ! isset( $this->value['ID'] ) ) {
-            return 0;
-        }
+		if ( ! isset( $this->value['ID'] ) ) {
+			return 0;
+		}
 		return $this->value['ID'];
+	}
+
+	public function attributes( array $attributes ) {
+		foreach ( $attributes as $key => $value ) {
+			$this->attributes[ $key ] = $value;
+		}
+		return $this;
 	}
 
 	public function __toString() {
 		return $this->url();
-    }
+	}
 
-    public function default( $default, string $size = 'thumbnail' ) {
-        if( is_int( $default ) ) {
-            $this->default = wp_get_attachment_image_url( $default, $size );
-        } elseif( is_string( $default ) ) {
-            $this->default = $default;
-        }
-        return $this;
-    }
+	public function default( $default, string $size = 'thumbnail' ) {
+		if ( is_int( $default ) ) {
+			$this->default = wp_get_attachment_image_url( $default, $size );
+		} elseif ( is_string( $default ) ) {
+			$this->default = $default;
+		}
+		return $this;
+	}
 
 	public function url( string $size = 'thumbnail' ) {
 
-        if( $this->get_ID() != 0 ) {
-            return wp_get_attachment_image_url( $this->get_ID(), $size );
-        }
-        return $this->default;
+		if ( $this->get_ID() != 0 ) {
+			return wp_get_attachment_image_url( $this->get_ID(), $size );
+		}
+		return $this->default;
 
-    }
+	}
 
 	public function image( string $size = 'thumbnail' ) {
-        if( $this->get_ID() != 0 ) {
-            return wp_get_attachment_image( $this->get_ID(), $size );
-        }
+		if ( $this->get_ID() != 0 ) {
+			return wp_get_attachment_image( $this->get_ID(), $size, null, $this->attributes );
+		}
 
-        return sprintf( '<img src="%s" />', $this->default );
+		return sprintf( '<img src="%s" />', $this->default );
 	}
 
 }

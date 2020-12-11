@@ -3,14 +3,14 @@ namespace Otomaties\AcfObjects\Repeater;
 
 class Row {
 
-    protected $row;
+	protected $row;
 
-    public function __construct( $row = array() ) {
-        $this->row = $row;
-    }
+	public function __construct( $row = array() ) {
+		$this->row = $row;
+	}
 
-    public function get( $key ) {
-        return $this->row[$key];
-    }
+	public function get( $key ) {
+		return $this->row[ $key ];
+	}
 
 }
