@@ -14,7 +14,7 @@ abstract class Field {
 		$this->field   = $field;
     }
 
-	protected function value() {
+	public function value() {
 		return $this->value;
     }
 

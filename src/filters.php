@@ -11,7 +11,6 @@ add_filter(
 		if ( class_exists( $class ) ) {
 			$value = new $class( $value, $post_id, $field );
         }
-        echo $class;
 		return $value;
     }
     ,

@@ -2,9 +2,14 @@
 namespace Otomaties\AcfObjects;
 
 use Otomaties\AcfObjects\Abstracts\Field;
-use Otomaties\AcfObjects\Repeater\Row;
 
-class Repeater extends Field implements \ArrayAccess, \Iterator {
+class Gallery extends Field implements \ArrayAccess, \Iterator  {
+
+    public function images() {
+        return array_map(function($image_array){
+            return new Image( $image_array, $this->post_id, array() );
+        }, $this->value);
+    }
 
 	public function value() {
         if( is_array( $this->value ) ) {
@@ -22,7 +27,7 @@ class Repeater extends Field implements \ArrayAccess, \Iterator {
 	}
 
 	public function offsetGet( $offset ) {
-		return new Row( $this->value[ $offset ] );
+		return new Image( $this->value[ $offset ], $this->post_id, array() );
 	}
 
 	public function offsetSet( $offset, $value ) {
@@ -42,7 +47,7 @@ class Repeater extends Field implements \ArrayAccess, \Iterator {
 
 	public function current() {
 		$value = current( $this->value );
-		return new Row( $value );
+		return new Image( $value, $this->post_id, array() );
 	}
 
 	public function key() {
@@ -63,4 +68,5 @@ class Repeater extends Field implements \ArrayAccess, \Iterator {
         }
 		return $value;
 	}
+
 }
