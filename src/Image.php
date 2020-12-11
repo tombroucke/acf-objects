@@ -1,5 +1,5 @@
 <?php //phpcs:ignore
-namespace Otomaties\ACFObjects;
+namespace Otomaties\AcfObjects;
 
 use App\ACF_Objects\Abstracts\Field;
 

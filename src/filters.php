@@ -7,10 +7,14 @@ if ( ! function_exists( 'add_filter' ) ) {
 add_filter(
 	'acf/format_value',
 	function( $value, $post_id, $field ) {
-		$class = '\\Otomaties\\ACF_Objects\\' . ucfirst( $field['type'] );
+		$class = '\\Otomaties\\AcfObjects\\' . ucfirst( $field['type'] );
 		if ( class_exists( $class ) ) {
 			$value = new $class( $value, $post_id, $field );
-		}
+        }
+        echo $class;
 		return $value;
-	}
+    }
+    ,
+    99999999,
+    3
 );

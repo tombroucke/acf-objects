@@ -1,5 +1,5 @@
 <?php //phpcs:ignore
-namespace Otomaties\ACF_Objects\Repeater;
+namespace Otomaties\AcfObjects\Repeater;
 
 class Row {
 

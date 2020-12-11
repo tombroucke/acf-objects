@@ -3,7 +3,7 @@
     "description": "Make get_field return objects",
     "autoload": {
         "psr-4": {
-            "Otomaties\\Acf_Objects\\": "src/"
+            "Otomaties\\AcfObjects\\": "src/"
         },
         "files": [
             "src/filters.php"

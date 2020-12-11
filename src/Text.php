@@ -1,7 +1,7 @@
 <?php //phpcs:ignore
-namespace Otomaties\ACF_Objects;
+namespace Otomaties\AcfObjects;
 
-use Otomaties\ACF_Objects\Abstracts\Field;
+use Otomaties\AcfObjects\Abstracts\Field;
 
 class Text extends Field {
 

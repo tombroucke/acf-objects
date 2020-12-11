@@ -1,8 +1,8 @@
 <?php //phpcs:ignore
-namespace Otomaties\ACF_Objects;
+namespace Otomaties\AcfObjects;
 
-use Otomaties\ACF_Objects\Abstracts\Field;
-use Otomaties\ACF_Objects\Repeater\Row;
+use Otomaties\AcfObjects\Abstracts\Field;
+use Otomaties\AcfObjects\Repeater\Row;
 
 class Repeater extends Field implements \ArrayAccess, \Iterator {
 

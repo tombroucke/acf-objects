@@ -1,5 +1,5 @@
 <?php //phpcs:ignore
-namespace Otomaties\ACF_Objects\Abstracts;
+namespace Otomaties\AcfObjects\Abstracts;
 
 abstract class Field {
 
