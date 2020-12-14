@@ -5,7 +5,7 @@ class Row {
 
 	protected $row;
 
-	public function __construct( $row = array() ) {
+	public function __construct( array $row = array() ) {
 		$this->row = $row;
 	}
 
