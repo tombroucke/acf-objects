@@ -8,7 +8,7 @@ abstract class Field {
 	protected $field   = array();
 	protected $default = '';
 
-	public function __construct( $value, int $post_id = 0, array $field = array() ) {
+	public function __construct( $value, $post_id = 0, array $field = array() ) {
 		$this->value   = $value;
 		$this->post_id = $post_id;
 		$this->field   = $field;

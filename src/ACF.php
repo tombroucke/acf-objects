@@ -20,7 +20,6 @@ class ACF {
 			);
 			$format_value = false;
 		}
-
 		$value = acf_get_value( $post_id, $field );
 		if ( $format_value ) {
 			$value = acf_format_value( $value, $post_id, $field );

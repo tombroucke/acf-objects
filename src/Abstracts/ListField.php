@@ -1,7 +1,7 @@
 <?php //phpcs:ignore
 namespace Otomaties\AcfObjects\Abstracts;
 
-abstract class ListField extends Field implements \ArrayAccess, \Iterator {
+abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Countable {
 
 	public function offsetExists( $offset ) {
 		return isset( $this->value[ $offset ] );
@@ -50,6 +50,10 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator {
 
     public function is_empty() {
         return empty( $this->value );
+    }
+
+    public function count() {
+        return count( $this->value );
     }
 
 }

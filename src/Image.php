@@ -10,7 +10,7 @@ class Image extends Field {
 
 	private $url;
 
-	public function __construct( $value, int $post_id = 0, array $field = array() ) {
+	public function __construct( $value, $post_id = 0, array $field = array() ) {
 		if ( filter_var( $value, FILTER_VALIDATE_URL ) ) {
 			$this->url = $value;
         }
