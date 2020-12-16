@@ -7,9 +7,6 @@ class ACF {
 		$post_id = acf_get_valid_post_id( $post_id );
 		$field = acf_maybe_get_field( $selector, $post_id );
 
-		$field['return_object'] = true;
-		$field                  = self::recursive_add_return_object( $field );
-
 		if ( ! $field ) {
 			$field = acf_get_valid_field(
 				array(
@@ -20,6 +17,10 @@ class ACF {
 			);
 			$format_value = false;
 		}
+
+		$field['return_object'] = true;
+		$field                  = self::recursive_add_return_object( $field );
+
 		$value = acf_get_value( $post_id, $field );
 		if ( $format_value ) {
 			$value = acf_format_value( $value, $post_id, $field );
