@@ -1,7 +1,7 @@
 <?php //phpcs:ignore
 namespace Otomaties\AcfObjects;
 
-class ACF {
+class Acf {
 
 	public static function get_field( $selector, $post_id = false, $format_value = true ) {
 		$post_id = acf_get_valid_post_id( $post_id );
