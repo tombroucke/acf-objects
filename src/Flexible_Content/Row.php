@@ -1,5 +1,5 @@
 <?php //phpcs:ignore
-namespace Otomaties\AcfObjects\Flexible_Content;
+namespace Otomaties\AcfObjects\Flexible_content;
 
 class Row {
 

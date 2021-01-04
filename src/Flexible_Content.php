@@ -2,9 +2,9 @@
 namespace Otomaties\AcfObjects;
 
 use Otomaties\AcfObjects\Abstracts\ListField;
-use Otomaties\AcfObjects\Flexible_Content\Row;
+use Otomaties\AcfObjects\Flexible_content\Row;
 
-class Flexible_Content extends ListField {
+class Flexible_content extends ListField {
 
 	public function value() {
 		if ( is_array( $this->value ) ) {
