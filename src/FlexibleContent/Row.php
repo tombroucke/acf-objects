@@ -1,5 +1,5 @@
 <?php
-namespace Otomaties\AcfObjects\Repeater;
+namespace Otomaties\AcfObjects\FlexibleContent;
 
 class Row
 {
@@ -13,5 +13,10 @@ class Row
     public function get($key)
     {
         return $this->row[ $key ];
+    }
+
+    public function layout()
+    {
+        return $this->get('acf_fc_layout');
     }
 }

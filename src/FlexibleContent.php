@@ -2,8 +2,9 @@
 namespace Otomaties\AcfObjects;
 
 use Otomaties\AcfObjects\Abstracts\ListField;
+use Otomaties\AcfObjects\FlexibleContent\Row;
 
-class Gallery extends ListField
+class FlexibleContent extends ListField
 {
 
     public function value()
@@ -17,7 +18,7 @@ class Gallery extends ListField
     public function offsetGet($offset)
     {
         if (isset($this->value[ $offset ])) {
-            return new Image($this->value[ $offset ], $this->post_id, array());
+            return new Row($this->value[ $offset ]);
         }
         return null;
     }
@@ -25,6 +26,6 @@ class Gallery extends ListField
     public function current()
     {
         $value = current($this->value);
-        return new Image($value, $this->post_id, array());
+        return new Row($value);
     }
 }
