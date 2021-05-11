@@ -11,8 +11,6 @@ composer require tombroucke/acf-objects
 
 ```blade
 @use(Otomaties\AcfObjects\Acf)
-@use(Otomaties\AcfObjects\Text)
-@use(Otomaties\AcfObjects\Image)
 
 @if (Acf::get_field('text')->isset())
   <h2>Text field</h2>
