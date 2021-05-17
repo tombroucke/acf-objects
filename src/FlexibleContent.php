@@ -6,15 +6,12 @@ use Otomaties\AcfObjects\FlexibleContent\Row;
 
 class FlexibleContent extends ListField
 {
-
-    public function value()
-    {
-        if (is_array($this->value)) {
-            return $this->value;
-        }
-        return array();
-    }
-
+    /**
+     * Returns the value (a row) at specified offset.
+     *
+     * @param [type] $offset The offset to retrieve.
+     * @return Row|null
+     */
     public function offsetGet($offset)
     {
         if (isset($this->value[ $offset ])) {
@@ -23,6 +20,11 @@ class FlexibleContent extends ListField
         return null;
     }
 
+    /**
+     * Returns the current element.
+     *
+     * @return Row
+     */
     public function current()
     {
         $value = current($this->value);

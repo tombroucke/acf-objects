@@ -8,8 +8,21 @@ class Image extends Field
 {
     use Attributes;
 
-    private $url;
+    /**
+     * The image URL
+     *
+     * @var string|null
+     */
+    private $url = null;
 
+    /**
+     * Set ACF Field object's value, post ID and field
+     * Save url if ACF return value is set to URL
+     *
+     * @param [type] $value
+     * @param integer $post_id
+     * @param array $field
+     */
     public function __construct($value, $post_id = 0, array $field = array())
     {
         if (filter_var($value, FILTER_VALIDATE_URL)) {
@@ -18,6 +31,11 @@ class Image extends Field
         parent::__construct($value, $post_id, $field);
     }
 
+    /**
+     * Get the image ID
+     *
+     * @return int Zero in case ID is unknown
+     */
     public function get_ID()
     {
         // Only in case an ID or array is returned.
@@ -29,6 +47,13 @@ class Image extends Field
         return 0;
     }
 
+    /**
+     * Set default image
+     *
+     * @param int|string $default Image ID or url
+     * @param string $size WordPress image size name (thumbnail, medium, large, ...)
+     * @return self
+     */
     public function default($default, string $size = 'thumbnail')
     {
         if (is_int($default)) {
@@ -39,6 +64,12 @@ class Image extends Field
         return $this;
     }
 
+    /**
+     * Get image url
+     *
+     * @param string $size WordPress image size name (thumbnail, medium, large, ...)
+     * @return string
+     */
     public function url(string $size = 'thumbnail')
     {
 
@@ -50,6 +81,12 @@ class Image extends Field
         return $this->default;
     }
 
+    /**
+     * Get full image tag
+     *
+     * @param string $size WordPress image size name (thumbnail, medium, large, ...)
+     * @return string
+     */
     public function image(string $size = 'thumbnail')
     {
         if ($this->get_ID() != 0) {
@@ -61,6 +98,11 @@ class Image extends Field
         }
     }
 
+    /**
+     * Return url if object is echoed
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->url();

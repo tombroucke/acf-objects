@@ -9,21 +9,41 @@ class Link extends Field
 
     use Attributes;
 
+    /**
+     * Get link url
+     *
+     * @return string
+     */
     public function url()
     {
         return isset($this->value['url']) ? $this->value['url'] : '';
     }
 
+    /**
+     * Get link target
+     *
+     * @return string
+     */
     public function target()
     {
         return isset($this->value['target']) ? $this->value['target'] : '';
     }
 
+    /**
+     * Get link title
+     *
+     * @return string
+     */
     public function title()
     {
         return isset($this->value['title']) ? $this->value['title'] : '';
     }
 
+    /**
+     * Get full a tag
+     *
+     * @return string
+     */
     public function link()
     {
         if (! $this->value) {
@@ -39,6 +59,11 @@ class Link extends Field
         return sprintf('<a href="%s"%s%s>%s</a>', $this->url(), $target, $attributes, $this->title());
     }
 
+    /**
+     * Return url if object is echoed
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->url();

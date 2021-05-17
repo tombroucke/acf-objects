@@ -5,15 +5,12 @@ use Otomaties\AcfObjects\Abstracts\ListField;
 
 class Gallery extends ListField
 {
-
-    public function value()
-    {
-        if (is_array($this->value)) {
-            return $this->value;
-        }
-        return array();
-    }
-
+    /**
+     * Returns the value (an Image) at specified offset.
+     *
+     * @param [type] $offset The offset to retrieve.
+     * @return Image|null
+     */
     public function offsetGet($offset)
     {
         if (isset($this->value[ $offset ])) {
@@ -22,6 +19,11 @@ class Gallery extends ListField
         return null;
     }
 
+    /**
+     * Returns the current element.
+     *
+     * @return Image
+     */
     public function current()
     {
         $value = current($this->value);

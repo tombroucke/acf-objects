@@ -5,11 +5,4 @@ use Otomaties\AcfObjects\Abstracts\Field;
 
 class Select extends Field
 {
-    public function __toString()
-    {
-        if (! $this->value()) {
-            return $this->default;
-        }
-        return $this->value();
-    }
 }
