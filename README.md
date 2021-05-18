@@ -42,7 +42,7 @@ Wherever you want to use ACF Objects, import the Otomaties\AcfObjects\Acf class:
 ### Image tag with attributes, wrapped with link
 ```php
 <a href="<?php echo Acf::get_field('image')->url('full'); ?>">
-	<?php echo Acf::get_field('image')->attributes(['class' => 'w-100'])->image('thumbnail'); ?>
+  <?php echo Acf::get_field('image')->attributes(['class' => 'w-100'])->image('thumbnail'); ?>
 </a>
 ```
 
@@ -59,13 +59,13 @@ Wherever you want to use ACF Objects, import the Otomaties\AcfObjects\Acf class:
 ### Repeater iteration
 ```php
 <table class="table">
-	<?php foreach (Acf::get_field('repeater') as $key => $row): ?>
-      <tr>
-        <td><?php echo $key; ?></td>
-        <td><?php echo $row->get('text'); ?></td>
-        <td><?php echo $row->get('image')->image('thumbnail'); ?></td>
-      </tr>
-	<?php endforeach; ?>
+<?php foreach (Acf::get_field('repeater') as $key => $row): ?>
+  <tr>
+    <td><?php echo $key; ?></td>
+    <td><?php echo $row->get('text'); ?></td>
+    <td><?php echo $row->get('image')->image('thumbnail'); ?></td>
+  </tr>
+<?php endforeach; ?>
 </table>
 
 ```
@@ -98,9 +98,9 @@ Wherever you want to use ACF Objects, import the Otomaties\AcfObjects\Acf class:
 ### Gallery
 ```php
 <ul>
-	<?php foreach (Acf::get_field('gallery') as $image): ?>
-	  <li><?php echo $image->attributes(['class' => 'd-none'])->image(); ?></li>
-	<?php endforeach; ?>
+<?php foreach (Acf::get_field('gallery') as $image): ?>
+  <li><?php echo $image->attributes(['class' => 'd-none'])->image(); ?></li>
+<?php endforeach; ?>
 </ul>
 ```
 
