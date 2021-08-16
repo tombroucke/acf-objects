@@ -13,6 +13,6 @@ class Group extends Field
      */
     public function get(string $param)
     {
-        return $this->value[ $param ];
+        return isset($this->value[$param]) ? $this->value[$param] : false;
     }
 }
