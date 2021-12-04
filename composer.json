@@ -8,5 +8,8 @@
         "files": [
             "src/filters.php"
         ]
+    },
+    "require": {
+        "phpunit/phpunit": "^9.5"
     }
 }

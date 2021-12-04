@@ -27,9 +27,9 @@ class Row
      * @param string $key The sub field key
      * @return mixed
      */
-    public function get($key)
+    public function get(string $key)
     {
-        return $this->row[ $key ];
+        return isset($this->row[$key]) ? $this->row[$key] : null;
     }
 
     /**
@@ -37,7 +37,7 @@ class Row
      *
      * @return string
      */
-    public function layout()
+    public function layout() : string
     {
         return $this->get('acf_fc_layout');
     }

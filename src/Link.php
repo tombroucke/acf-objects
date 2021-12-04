@@ -14,19 +14,19 @@ class Link extends Field
      *
      * @return string
      */
-    public function url()
+    public function url() : ?string
     {
-        return isset($this->value['url']) ? $this->value['url'] : '';
+        return isset($this->value['url']) ? $this->value['url'] : null;
     }
 
     /**
      * Get link target
      *
-     * @return string
+     * @return string|null
      */
-    public function target()
+    public function target() : ?string
     {
-        return isset($this->value['target']) ? $this->value['target'] : '';
+        return isset($this->value['target']) ? $this->value['target'] : null;
     }
 
     /**
@@ -34,29 +34,25 @@ class Link extends Field
      *
      * @return string
      */
-    public function title()
+    public function title() : ?string
     {
-        return isset($this->value['title']) ? $this->value['title'] : '';
+        return isset($this->value['title']) ? $this->value['title'] : null;
     }
 
     /**
-     * Get full a tag
+     * Compose full a tag
      *
-     * @return string
+     * @return string|null
      */
-    public function link()
+    public function link() : ?string
     {
         if (! $this->value) {
-            return '';
+            return null;
         }
-        $target     = ( $this->target() ? sprintf(' target="%s"', $this->target()) : '' );
-        $attributes = '';
-        if (! empty($this->attributes)) {
-            foreach ($this->attributes as $key => $value) {
-                $attributes .= ' ' . $key . '="' . $value . '"';
-            }
+        if ($this->target()) {
+            $this->attributes(['target' => $this->target()]);
         }
-        return sprintf('<a href="%s"%s%s>%s</a>', $this->url(), $target, $attributes, $this->title());
+        return sprintf('<a href="%s"%s>%s</a>', $this->url(), $this->attributesString(), $this->title());
     }
 
     /**
@@ -64,8 +60,8 @@ class Link extends Field
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
-        return $this->url();
+        return $this->url() ?: '';
     }
 }

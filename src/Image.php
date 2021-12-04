@@ -13,7 +13,11 @@ class Image extends Field
      *
      * @var string|null
      */
-    private $url = null;
+    private $originalUrl = null;
+
+    private $id = 0;
+
+    private $type = '';
 
     /**
      * Set ACF Field object's value, post ID and field
@@ -25,10 +29,28 @@ class Image extends Field
      */
     public function __construct($value, $post_id = 0, array $field = array())
     {
-        if (filter_var($value, FILTER_VALIDATE_URL)) {
-            $this->url = $value;
-        }
+        $this->initProperties($value);
+
         parent::__construct($value, $post_id, $field);
+    }
+
+    private function initProperties($value)
+    {
+        if (is_numeric($value)) {
+            $this->setId($value);
+            $this->type = 'id';
+        } elseif (is_array($value) && isset($value['ID'])) {
+            $this->setId($value['ID']);
+            $this->type = 'array';
+        } elseif (filter_var($value, FILTER_VALIDATE_URL)) {
+            $this->originalUrl = $value;
+            $this->type = 'external';
+        }
+    }
+
+    private function setId(int $id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -36,15 +58,16 @@ class Image extends Field
      *
      * @return int Zero in case ID is unknown
      */
-    public function get_ID()
+    private function getId()
     {
         // Only in case an ID or array is returned.
-        if (is_numeric($this->value)) {
-            return $this->value;
-        } elseif (isset($this->value['ID'])) {
-            return $this->value['ID'];
-        }
-        return 0;
+        return $this->id;
+    }
+
+    private function get_ID()
+    {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated. Use empty() instead.', E_USER_DEPRECATED);
+        return $this->getId();
     }
 
     /**
@@ -54,7 +77,7 @@ class Image extends Field
      * @param string $size WordPress image size name (thumbnail, medium, large, ...)
      * @return self
      */
-    public function default($default, string $size = 'thumbnail')
+    public function default($default, string $size = 'thumbnail') : self
     {
         if (is_int($default)) {
             $this->default = wp_get_attachment_image_url($default, $size);
@@ -72,13 +95,15 @@ class Image extends Field
      */
     public function url(string $size = 'thumbnail')
     {
-
-        if ($this->get_ID() != 0) {
-            return wp_get_attachment_image_url($this->get_ID(), $size);
-        } elseif (isset($this->url)) {
-            return $this->url;
+        $url = null;
+        if ($this->type == 'external') {
+            $url = $this->originalUrl;
+        } elseif ($this->getId() != 0) {
+            $url = wp_get_attachment_image_url($this->getId(), $size);
+        } elseif ($this->default) {
+            $url = $this->default;
         }
-        return $this->default;
+        return $url;
     }
 
     /**
@@ -87,15 +112,18 @@ class Image extends Field
      * @param string $size WordPress image size name (thumbnail, medium, large, ...)
      * @return string
      */
-    public function image(string $size = 'thumbnail')
+    public function image(string $size = 'thumbnail') : ?string
     {
-        if ($this->get_ID() != 0) {
-            return wp_get_attachment_image($this->get_ID(), $size, null, $this->attributes);
-        } elseif (isset($this->url)) {
-            return sprintf('<img src="%s" />', $this->url);
-        } elseif ($this->default) {
-            return sprintf('<img src="%s" />', $this->default);
+        if ($this->getId() != 0) {
+            return wp_get_attachment_image($this->getId(), $size, null, $this->attributes);
         }
+
+        $imageUrl = $this->url();
+
+        if (!$imageUrl) {
+            return null;
+        }
+        return sprintf('<img src="%s"%s />', $imageUrl, $this->attributesString());
     }
 
     /**
@@ -103,8 +131,8 @@ class Image extends Field
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
-        return $this->url();
+        return $this->url() ?: '';
     }
 }

@@ -22,7 +22,7 @@ abstract class Field
      *
      * @var array
      */
-    protected $field   = array();
+    protected $field = [];
 
     /**
      * The default value for this field
@@ -38,11 +38,11 @@ abstract class Field
      * @param integer $post_id The field's post ID. Zero when field is not for a post
      * @param array $field The default ACF Field array
      */
-    public function __construct($value, $post_id = 0, array $field = array())
+    public function __construct($value, $post_id = 0, array $field = [])
     {
-        $this->value   = $value;
+        $this->value = $value;
         $this->post_id = $post_id;
-        $this->field   = $field;
+        $this->field = $field;
     }
 
     /**
@@ -61,7 +61,7 @@ abstract class Field
      * @param mixed $default
      * @return self
      */
-    public function default($default)
+    public function default($default) : self
     {
         $this->default = $default;
         return $this;
@@ -72,19 +72,30 @@ abstract class Field
      *
      * @return boolean
      */
-    public function empty()
+    public function empty() : bool
+    {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated. Use empty() instead.', E_USER_DEPRECATED);
+        return $this->isEmpty();
+    }
+
+    /**
+     * Check if field is empty
+     *
+     * @return boolean
+     */
+    public function isEmpty() : bool
     {
         return empty($this->value);
     }
 
     /**
-     * Check if field is not emptu
+     * Check if field is set
      *
      * @return boolean
      */
-    public function isset()
+    public function isSet() : bool
     {
-        return ! empty($this->value);
+        return ! $this->isEmpty();
     }
 
     /**
@@ -92,7 +103,7 @@ abstract class Field
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         if (! $this->value()) {
             return $this->default;

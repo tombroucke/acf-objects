@@ -11,10 +11,10 @@ class Gallery extends ListField
      * @param [type] $offset The offset to retrieve.
      * @return Image|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset) : ?Image
     {
         if (isset($this->value[ $offset ])) {
-            return new Image($this->value[ $offset ], $this->post_id, array());
+            return new Image($this->value[ $offset ], $this->post_id, []);
         }
         return null;
     }
@@ -27,6 +27,6 @@ class Gallery extends ListField
     public function current()
     {
         $value = current($this->value);
-        return new Image($value, $this->post_id, array());
+        return new Image($value, $this->post_id, []);
     }
 }

@@ -12,7 +12,7 @@ class FlexibleContent extends ListField
      * @param [type] $offset The offset to retrieve.
      * @return Row|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset) : ?Row
     {
         if (isset($this->value[ $offset ])) {
             return new Row($this->value[ $offset ]);
@@ -25,7 +25,7 @@ class FlexibleContent extends ListField
      *
      * @return Row
      */
-    public function current()
+    public function current() : Row
     {
         $value = current($this->value);
         return new Row($value);

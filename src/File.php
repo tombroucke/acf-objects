@@ -2,41 +2,42 @@
 namespace Otomaties\AcfObjects;
 
 use Otomaties\AcfObjects\Abstracts\Field;
-use Otomaties\AcfObjects\Traits\Attributes;
 
 class File extends Field
 {
-
-    use Attributes;
-
     /**
      * Get link url
      *
      * @return string
      */
-    public function url()
+    public function url() : ?string
     {
-        return isset($this->value['url']) ? $this->value['url'] : '';
+        return isset($this->value['url']) ? $this->value['url'] : null;
     }
 
-    public function title() {
-        return isset($this->value['title']) ? $this->value['title'] : '';
+    public function title() : ?string
+    {
+        return isset($this->value['title']) ? $this->value['title'] : null;
     }
 
-    public function mimeType() {
-        return isset($this->value['mime_type']) ? $this->value['mime_type'] : '';
+    public function mimeType() : ?string
+    {
+        return isset($this->value['mime_type']) ? $this->value['mime_type'] : null;
     }
 
-    public function width() {
-        return isset($this->value['width']) ? $this->value['width'] : '';
+    public function width() : ?string
+    {
+        return isset($this->value['width']) ? $this->value['width'] : null;
     }
 
-    public function height() {
-        return isset($this->value['height']) ? $this->value['height'] : '';
+    public function height() : ?string
+    {
+        return isset($this->value['height']) ? $this->value['height'] : null;
     }
 
-    public function caption() {
-        return isset($this->value['caption']) ? $this->value['caption'] : '';
+    public function caption() : ?string
+    {
+        return isset($this->value['caption']) ? $this->value['caption'] : null;
     }
 
     /**
@@ -44,7 +45,7 @@ class File extends Field
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->url();
     }
