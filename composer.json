@@ -9,7 +9,7 @@
             "src/filters.php"
         ]
     },
-    "require": {
+    "require-dev": {
         "phpunit/phpunit": "^9.5"
     }
 }
