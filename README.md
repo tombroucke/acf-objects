@@ -1,5 +1,4 @@
 # ACF Objects
-The examples are written in Blade syntax, but can easily be converted to plain PHP.
 
 ## Installation
 
