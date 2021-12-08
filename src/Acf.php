@@ -88,8 +88,12 @@ class Acf
         $type = ucwords($type);
         $type = str_replace(' ', '', $type);
         $class = '\\Otomaties\\AcfObjects\\' . $type;
-        if (class_exists($class) && isset($field['return_object']) && $field['return_object'] === true) {
-            $value = new $class($value, $post_id, $field);
+        if(isset($field['return_object']) && $field['return_object'] === true) {
+            if (class_exists($class)) {
+                $value = new $class($value, $post_id, $field);
+            } else {
+                $value = new Field($value, $post_id, $field);
+            }
         }
         return $value;
     }
