@@ -7,29 +7,64 @@ The examples are written in Blade syntax, but can easily be converted to plain P
 composer require tombroucke/acf-objects
 ```
 
-## Examples
+# Examples
 Wherever you want to use ACF Objects, import the Otomaties\AcfObjects\Acf class:
 
 ```php
 <?php use Otomaties\AcfObjects\Acf; ?>
 ```
 
-### Text field
+### Test if field has value
 ```php
-<?php echo Acf::get_field('text'); ?>
+<?php if(Acf::get_field('fieldname')->isSet()): ?>
+<?php endif; ?>
 ```
+#### Fields with array access (Gallery, Repeater, Flexible Content)
 ```php
-<?php echo Acf::get_field('text')->default('Default text'); ?>
-
-```
-
-### Text field from other post
-```php
-<?php echo Acf::get_field('text', 51); ?>
-
+<?php if(!Acf::get_field('fieldname')->isEmpy()): ?>
+<?php endif; ?>
 ```
 
-### Image url
+## Datepicker
+```php
+<?php echo Acf::get_field('date')->format('d/m/Y'); ?>
+```
+
+## File
+```php
+<?php echo Acf::get_field('file')->url(); ?>
+<?php echo Acf::get_field('file')->title(); ?>
+<?php echo Acf::get_field('file')->filesize(); ?>
+```
+
+## Gallery
+```php
+<ul>
+  <?php foreach (Acf::get_field('gallery') as $image): ?>
+    <li><?php echo $image->attributes(['class' => 'd-none'])->image(); ?></li>
+  <?php endforeach; ?>
+</ul>
+```
+
+#### Gallery array access
+```php
+<?php echo Acf::get_field('gallery')[1]->image(); ?>
+```
+
+## Google maps
+```php
+<?php echo Acf::get_field('google_map')->address(); ?>
+<?php echo Acf::get_field('google_map')->lat(); ?>
+<?php echo Acf::get_field('google_map')->lat(); ?>
+...
+```
+
+## Group
+```php
+<?php echo Acf::get_field('group')->get('text'); ?>
+```
+
+## Image
 ```php
 <?php echo Acf::get_field('image')->url('medium'); ?> 
 ```
@@ -39,74 +74,70 @@ Wherever you want to use ACF Objects, import the Otomaties\AcfObjects\Acf class:
 <?php echo Acf::get_field('image')->image('medium'); ?>
 ```
 
-### Image tag with attributes, wrapped with link
+#### Image tag with attributes, wrapped with link
 ```php
 <a href="<?php echo Acf::get_field('image')->url('full'); ?>">
   <?php echo Acf::get_field('image')->attributes(['class' => 'w-100'])->image('thumbnail'); ?>
 </a>
 ```
 
-### Image with default image from media library, media ID 48
+#### Image with default image from media library, media ID 48
 ```php
 <?php echo Acf::get_field('image')->default(48, 'thumbnail')->image('thumbnail'); ?>
 ```
 
-### Image with default image from url
+#### Image with default image from url
 ```php
 <?php echo Acf::get_field('image')->default('https://picsum.photos/150/150')->image('thumbnail'); ?>
 ```
 
-### Repeater iteration
+## Link
+
+```php
+<?php echo Acf::get_field('link')->link(); // Will output an a-tag with href, target & title ?>
+```
+```php
+<?php echo Acf::get_field('link')->attributes(['class' => 'btn btn-primary','data-foo' => 'bar'])->link(); ?>
+```
+```php
+<a href="<?php echo Acf::get_field('link')->url(); ?>" target="<?php echo Acf::get_field('link')->target(); ?>">
+    <?php echo Acf::get_field('link')->title(); ?>
+</a>
+```
+
+## Repeater
 ```php
 <table class="table">
-<?php foreach (Acf::get_field('repeater') as $key => $row): ?>
-  <tr>
-    <td><?php echo $key; ?></td>
-    <td><?php echo $row->get('text'); ?></td>
-    <td><?php echo $row->get('image')->image('thumbnail'); ?></td>
-  </tr>
-<?php endforeach; ?>
+  <?php foreach (Acf::get_field('repeater') as $key => $row): ?>
+    <tr>
+      <td><?php echo $key; ?></td>
+      <td><?php echo $row->get('text'); ?></td>
+      <td><?php echo $row->get('image')->image('thumbnail'); ?></td>
+    </tr>
+  <?php endforeach; ?>
 </table>
 
 ```
 
 ### Repeater array access
 ```php
-
 <?php if (isset(Acf::get_field('repeater')[0])): ?>
   <?php echo Acf::get_field('repeater')[0]->get('text'); ?>
 <?php endif; ?>
 ```
 
-### Link
+## Text
+```php
+<?php echo Acf::get_field('text'); ?>
+```
+```php
+<?php echo Acf::get_field('text')->default('Default text'); ?>
 
-```php
-<?php echo Acf::get_field('link')->link(); // Will output an a-tag ?>
-```
-```php
-<?php echo Acf::get_field('link')->attributes(['class' => 'btn btn-primary','data-foo' => 'bar'])->link(); ?>
-```
-```php
-<a href="<?php echo Acf::get_field('link')->url(); ?>" target="<?php echo Acf::get_field('link')->target(); ?>"><?php echo Acf::get_field('link')->title(); ?></a>
 ```
 
-### Group
+### Text from other post
 ```php
-<?php echo Acf::get_field('group')->get('text'); ?>
-```
-
-### Gallery
-```php
-<ul>
-<?php foreach (Acf::get_field('gallery') as $image): ?>
-  <li><?php echo $image->attributes(['class' => 'd-none'])->image(); ?></li>
-<?php endforeach; ?>
-</ul>
-```
-
-### Gallery array access
-```php
-<?php echo Acf::get_field('gallery')[1]->image(); ?>
+<?php echo Acf::get_field('text', 51); ?>
 ```
 
 

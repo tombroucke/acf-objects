@@ -2,6 +2,10 @@
 use PHPUnit\Framework\TestCase;
 use Otomaties\AcfObjects\Link;
 
+function esc_url($url) {
+    return $url;
+}
+
 final class LinkTest extends TestCase
 {
     private $linkArray = [
@@ -49,6 +53,7 @@ final class LinkTest extends TestCase
         $this->assertIsString($this->link->link());
         $this->assertEquals($this->link->link(), '<a href="http://development.local/sample-page/" target="_blank">Hello world!</a>');
         $this->assertEquals($this->linkWithoutTarget->link(), '<a href="http://development.local/sample-page/">Hello world!</a>');
+        $this->assertEquals($this->linkWithoutTarget->attributes(['class' => 'custom-link'])->link(), '<a href="http://development.local/sample-page/" class="custom-link">Hello world!</a>');
         $this->assertEquals($this->emptyLink->title(), '');
     }
 
