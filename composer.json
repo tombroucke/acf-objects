@@ -4,12 +4,16 @@
     "autoload": {
         "psr-4": {
             "Otomaties\\AcfObjects\\": "src/"
-        },
-        "files": [
-            "src/filters.php"
-        ]
+        }
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
+    },
+    "extra": {
+      "acorn": {
+        "providers": [
+          "Otomaties\\AcfObjects\\AcfObjectsServiceProvider"
+        ]
+      }
     }
 }
