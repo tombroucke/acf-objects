@@ -6,6 +6,21 @@
 composer require tombroucke/acf-objects
 ```
 
+# Usage
+- In sage 10, Acorn should be able to locate src/AcfObjectsServiceProvider.php. If it doesn't, you should add this provider to the providers array in /config/app.php:
+
+```php
+Otomaties\AcfObjects\AcfObjectsServiceProvider::class
+```
+
+- To use this library without Acorn, use this snippet:
+```php
+add_filter('acf/format_value', function ($value, $post_id, $field) {
+    $value = \Otomaties\AcfObjects\Acf::findClassByFieldType($value, $post_id, $field);
+    return $value;
+}, 99, 3);
+```
+
 # Examples
 Wherever you want to use ACF Objects, import the Otomaties\AcfObjects\Acf class:
 
