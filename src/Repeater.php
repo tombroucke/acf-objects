@@ -14,8 +14,8 @@ class Repeater extends ListField
      */
     public function offsetGet($offset) : ?Row
     {
-        if (isset($this->value[ $offset ])) {
-            return new Row($this->value[ $offset ]);
+        if (isset($this->value[$offset])) {
+            return new Row($this->value[$offset]);
         }
         return null;
     }

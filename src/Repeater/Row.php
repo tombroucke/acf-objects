@@ -8,7 +8,7 @@ class Row
      *
      * @var array
      */
-    protected $row = [];
+    protected array $row = [];
 
     /**
      * Set row
@@ -26,7 +26,7 @@ class Row
      * @param string $key The sub field key
      * @return mixed
      */
-    public function get(string $key)
+    public function get(string $key) : mixed
     {
         return isset($this->row[$key]) ? $this->row[$key] : null;
     }

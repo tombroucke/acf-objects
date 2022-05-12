@@ -12,12 +12,9 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
      *
      * @return array
      */
-    public function value()
+    public function value() : array
     {
-        if (is_array($this->value)) {
-            return $this->value;
-        }
-        return array();
+        return is_array($this->value) ? $this->value : [];
     }
 
     /**
@@ -26,7 +23,7 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
      * @param mixed $offset An offset to check for.
      * @return boolean
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset) : bool
     {
         return isset($this->value[$offset]);
     }
@@ -34,10 +31,10 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
     /**
      * Returns the value at specified offset.
      *
-     * @param [type] $offset The offset to retrieve.
+     * @param mixed $offset The offset to retrieve.
      * @return mixed
      */
-    abstract public function offsetGet($offset);
+    abstract public function offsetGet(mixed $offset) : mixed;
 
     /**
      * Assigns a value to the specified offset.
@@ -46,7 +43,7 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
      * @param mixed $value The value to set.
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value) : void
     {
         if (is_null($offset)) {
             $this->value[] = $value;
@@ -61,7 +58,7 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
      * @param mixed $offset The offset to unset.
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset) : void
     {
         unset($this->value[$offset]);
     }
@@ -71,7 +68,7 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
      *
      * @return void
      */
-    public function rewind()
+    public function rewind() : void
     {
         if (!empty($this->value())) {
             reset($this->value);
@@ -83,10 +80,9 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
      *
      * @return mixed
      */
-    public function key()
+    public function key() : mixed
     {
-        $value = key($this->value);
-        return $value;
+        return key($this->value);
     }
 
     /**
@@ -94,14 +90,14 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
      *
      * @return mixed
      */
-    abstract public function current();
+    abstract public function current() : mixed;
 
     /**
      * Moves the current position to the next element.
      *
      * @return void
      */
-    public function next()
+    public function next() : void
     {
         next($this->value);
     }
@@ -111,9 +107,9 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
      *
      * @return boolean
      */
-    public function valid()
+    public function valid() : bool
     {
-        $value = null;
+        $value = false;
         if (! empty($this->value())) {
             $key   = key($this->value);
             $value = ( $key !== null && $key !== false );
@@ -122,15 +118,16 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
     }
 
     /**
+     * @deprecated
      * Check if field is empty
      *
      * @deprecated deprecated since version 2.0.5
      * @return boolean
      */
-    public function is_empty()
+    public function is_empty() : bool // phpcs:ignore
     {
-        trigger_error('Method ' . __METHOD__ . ' is deprecated. Use empty() instead.', E_USER_DEPRECATED);
-        return $this->empty();
+        trigger_error('Method ' . __METHOD__ . ' is deprecated. Use isEmpty() instead.', E_USER_DEPRECATED);
+        return $this->isEmpty();
     }
 
     /**
@@ -138,8 +135,8 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
      *
      * @return int The element count
      */
-    public function count()
+    public function count() : int
     {
-        return count($this->value);
+        return count($this->value());
     }
 }

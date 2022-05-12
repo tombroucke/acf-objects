@@ -4,27 +4,6 @@ namespace Otomaties\AcfObjects\Abstracts;
 abstract class Field
 {
     /**
-     * The field's raw value
-     *
-     * @var mixed
-     */
-    protected $value;
-
-    /**
-     * The field's post ID. Zero when field is not for a post
-     *
-     * @var integer
-     */
-    protected $post_id = 0;
-
-    /**
-     * The default ACF Field array
-     *
-     * @var array
-     */
-    protected $field = [];
-
-    /**
      * The default value for this field
      *
      * @var string|array
@@ -35,14 +14,11 @@ abstract class Field
      * Set ACF Field object's value, post ID and field
      *
      * @param mixed $value The field's raw value
-     * @param integer $post_id The field's post ID. Zero when field is not for a post
+     * @param mixed $postId The field's post ID. Zero when field is not for a post
      * @param array $field The default ACF Field array
      */
-    public function __construct($value, $post_id = 0, array $field = [])
+    public function __construct(protected mixed $value, protected mixed $postId = 0, protected array $field = [])
     {
-        $this->value = $value;
-        $this->post_id = $post_id;
-        $this->field = $field;
     }
 
     /**
@@ -50,7 +26,7 @@ abstract class Field
      *
      * @return mixed
      */
-    public function value()
+    public function value() : mixed
     {
         return $this->value;
     }
@@ -59,22 +35,23 @@ abstract class Field
      * Set a default value
      *
      * @param mixed $default
-     * @return self
+     * @return Field
      */
-    public function default($default) : self
+    public function default($default) : Field
     {
         $this->default = $default;
         return $this;
     }
 
     /**
+     * @deprecated
      * Check if field is empty
      *
      * @return boolean
      */
     public function empty() : bool
     {
-        trigger_error('Method ' . __METHOD__ . ' is deprecated. Use empty() instead.', E_USER_DEPRECATED);
+        trigger_error('Method ' . __METHOD__ . ' is deprecated. Use isEmpty() instead.', E_USER_DEPRECATED);
         return $this->isEmpty();
     }
 

@@ -4,21 +4,13 @@ namespace Otomaties\AcfObjects\FlexibleContent;
 class Row
 {
     /**
-     * The ACF Flexible content row
-     *
-     * @var array
-     */
-    protected $row = [];
-
-    /**
      * Set row
      *
      * @param array $row The ACF Flexible content row
      * @return void
      */
-    public function __construct(array $row = [])
+    public function __construct(protected array $row = [])
     {
-        $this->row = $row;
     }
 
     /**
@@ -27,7 +19,7 @@ class Row
      * @param string $key The sub field key
      * @return mixed
      */
-    public function get(string $key)
+    public function get(string $key) : mixed
     {
         return isset($this->row[$key]) ? $this->row[$key] : null;
     }

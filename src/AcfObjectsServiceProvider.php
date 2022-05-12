@@ -22,8 +22,8 @@ class AcfObjectsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        add_filter('acf/format_value', function ($value, $post_id, $field) {
-            $value = Acf::findClassByFieldType($value, $post_id, $field);
+        add_filter('acf/format_value', function ($value, $postId, $field) {
+            $value = Acf::findClassByFieldType($value, $postId, $field);
             return $value;
         }, 99, 3);
     }

@@ -11,7 +11,7 @@ trait Attributes
      *
      * @var array
      */
-    protected $attributes = [];
+    protected array $attributes = [];
 
     /**
      * Set attributes
@@ -19,7 +19,7 @@ trait Attributes
      * @param array $attributes The array of attributes
      * @return self
      */
-    public function attributes(array $attributes = [])
+    public function attributes(array $attributes = []) : self
     {
         foreach ($attributes as $key => $value) {
             $this->attributes[ $key ] = $value;
@@ -48,10 +48,9 @@ trait Attributes
         if (empty($this->attributes)) {
             return '';
         }
-
         return ' ' . implode(' ', array_map(
-            function ($k, $v) {
-                return $k .'="'. htmlspecialchars($v) .'"';
+            function ($attribute, $value) {
+                return $attribute .'="'. htmlspecialchars($value) .'"';
             },
             array_keys($this->attributes),
             $this->attributes

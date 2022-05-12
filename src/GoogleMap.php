@@ -21,11 +21,9 @@ class GoogleMap extends Field
     private $zoom;
     private $defaults = null;
 
-    public function __construct($value, $post_id = 0, array $field = array())
+    public function __construct(protected mixed $value, protected mixed $postId = 0, protected array $field = [])
     {
         $this->initProperties($value);
-
-        parent::__construct($value, $post_id, $field);
     }
 
     public function initProperties($value)
@@ -45,7 +43,8 @@ class GoogleMap extends Field
         $this->zoom = isset($value['zoom']) ? $value['zoom'] : null;
     }
 
-    public function default ($default) : self {
+    public function default($default) : GoogleMap
+    {
         $possibleKeys = [
             'lat',
             'lng',
@@ -61,7 +60,7 @@ class GoogleMap extends Field
             'country_short',
             'zoom'
         ];
-        foreach($default as $key => $value) {
+        foreach ($default as $key => $value) {
             if (!in_array($key, $possibleKeys)) {
                 unset($default[$key]);
             }
@@ -70,71 +69,72 @@ class GoogleMap extends Field
         return $this;
     }
 
-    private function getDefault($key) {
+    private function getDefault($key) : mixed
+    {
         return isset($this->defaults[$key]) ? $this->defaults[$key] : null;
     }
 
-    public function lat() : ?float
+    public function lat() :? float
     {
         return isset($this->lat) ? $this->lat : $this->getDefault('lat');
     }
 
-    public function lng() : ?float
+    public function lng() :? float
     {
         return isset($this->lng) ? $this->lng : $this->getDefault('lng');
     }
 
-    public function address() : ?string
+    public function address() :? string
     {
         return isset($this->address) ? $this->address : $this->getDefault('address');
     }
 
-    public function name() : ?string
+    public function name() :? string
     {
         return isset($this->name) ? $this->name : $this->getDefault('name');
     }
 
-    public function streetName() : ?string
+    public function streetName() :? string
     {
         return isset($this->streetName) ? $this->streetName : $this->getDefault('street_name');
     }
 
-    public function streetNumber() : ?string
+    public function streetNumber() :? string
     {
         return isset($this->streetNumber) ? $this->streetNumber : $this->getDefault('street_number');
     }
 
-    public function city() : ?string
+    public function city() :? string
     {
         return isset($this->city) ? $this->city : $this->getDefault('city');
     }
 
-    public function state() : ?string
+    public function state() :? string
     {
         return isset($this->state) ? $this->state : $this->getDefault('state');
     }
 
-    public function stateShort() : ?string
+    public function stateShort() :? string
     {
         return isset($this->stateShort) ? $this->stateShort : $this->getDefault('state_short');
     }
 
-    public function postcode() : ?string
+    public function postcode() :? string
     {
         return isset($this->postcode) ? $this->postcode : $this->getDefault('post_code');
     }
 
-    public function country() : ?string
+    public function country() :? string
     {
         return isset($this->country) ? $this->country : $this->getDefault('country');
     }
 
-    public function countryShort() : ?string
+    public function countryShort() :? string
     {
         return isset($this->countryShort) ? $this->countryShort : $this->getDefault('country_short');
     }
 
-    public function zoom() : ?int
+    public function zoom() :? int
     {
         return isset($this->zoom) ? $this->zoom : $this->getDefault('zoom');
     }

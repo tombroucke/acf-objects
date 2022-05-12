@@ -69,9 +69,27 @@ class File extends Field
         return isset($this->value['status']) ? $this->value['status'] : null;
     }
 
-    public function uploaded_to() : ?string
+    /**
+     * @deprecated
+     * Get uploaded to
+     *
+     * @return string|null
+     */
+    public function uploadedTo() : ?string
     {
         return isset($this->value['uploaded_to']) ? $this->value['uploaded_to'] : null;
+    }
+
+    /**
+     * @deprecated
+     * Get uploaded to
+     *
+     * @return string|null
+     */
+    public function uploaded_to() : ?string // phpcs:ignore
+    {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated. Use isEmpty() instead.', E_USER_DEPRECATED);
+        return $this->uploadedTo();
     }
 
     public function date() : ?string

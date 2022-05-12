@@ -11,8 +11,8 @@ class Group extends Field
      * @param string $param The field key to fetch
      * @return mixed
      */
-    public function get(string $param)
+    public function get(string $param) : mixed
     {
-        return isset($this->value[$param]) ? $this->value[$param] : false;
+        return isset($this->value[$param]) ? $this->value[$param] : null;
     }
 }

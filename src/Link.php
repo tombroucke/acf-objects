@@ -16,7 +16,7 @@ class Link extends Field
      */
     public function url() : ?string
     {
-        return isset($this->value['url']) ? esc_url($this->value['url']) : null;
+        return isset($this->value()['url']) ? esc_url($this->value()['url']) : null;
     }
 
     /**
@@ -26,7 +26,7 @@ class Link extends Field
      */
     public function target() : ?string
     {
-        return isset($this->value['target']) ? $this->value['target'] : null;
+        return isset($this->value()['target']) ? $this->value()['target'] : null;
     }
 
     /**
@@ -36,7 +36,7 @@ class Link extends Field
      */
     public function title() : ?string
     {
-        return isset($this->value['title']) ? $this->value['title'] : null;
+        return isset($this->value()['title']) ? $this->value()['title'] : null;
     }
 
     /**
@@ -46,7 +46,7 @@ class Link extends Field
      */
     public function link() : ?string
     {
-        if (! $this->value) {
+        if (! $this->value()) {
             return null;
         }
         if ($this->target()) {
