@@ -30,31 +30,31 @@ Wherever you want to use ACF Objects, import the Otomaties\AcfObjects\Acf class:
 
 ### Test if field has value
 ```php
-<?php if(Acf::get_field('fieldname')->isSet()): ?>
+<?php if(Acf::getField('fieldname')->isSet()): ?>
 <?php endif; ?>
 ```
 #### Fields with array access (Gallery, Repeater, Flexible Content)
 ```php
-<?php if(!Acf::get_field('fieldname')->isEmpy()): ?>
+<?php if(!Acf::getField('fieldname')->isEmpy()): ?>
 <?php endif; ?>
 ```
 
 ## Datepicker
 ```php
-<?php echo Acf::get_field('date')->format('d/m/Y'); ?>
+<?php echo Acf::getField('date')->format('d/m/Y'); ?>
 ```
 
 ## File
 ```php
-<?php echo Acf::get_field('file')->url(); ?>
-<?php echo Acf::get_field('file')->title(); ?>
-<?php echo Acf::get_field('file')->filesize(); ?>
+<?php echo Acf::getField('file')->url(); ?>
+<?php echo Acf::getField('file')->title(); ?>
+<?php echo Acf::getField('file')->filesize(); ?>
 ```
 
 ## Gallery
 ```php
 <ul>
-  <?php foreach (Acf::get_field('gallery') as $image): ?>
+  <?php foreach (Acf::getField('gallery') as $image): ?>
     <li><?php echo $image->attributes(['class' => 'd-none'])->image(); ?></li>
   <?php endforeach; ?>
 </ul>
@@ -62,67 +62,67 @@ Wherever you want to use ACF Objects, import the Otomaties\AcfObjects\Acf class:
 
 #### Gallery array access
 ```php
-<?php echo Acf::get_field('gallery')[1]->image(); ?>
+<?php echo Acf::getField('gallery')[1]->image(); ?>
 ```
 
 ## Google maps
 ```php
-<?php echo Acf::get_field('google_map')->address(); ?>
-<?php echo Acf::get_field('google_map')->lat(); ?>
-<?php echo Acf::get_field('google_map')->lat(); ?>
+<?php echo Acf::getField('google_map')->address(); ?>
+<?php echo Acf::getField('google_map')->lat(); ?>
+<?php echo Acf::getField('google_map')->lat(); ?>
 ...
 ```
 
 ## Group
 ```php
-<?php echo Acf::get_field('group')->get('text'); ?>
+<?php echo Acf::getField('group')->get('text'); ?>
 ```
 
 ## Image
 ```php
-<?php echo Acf::get_field('image')->url('medium'); ?> 
+<?php echo Acf::getField('image')->url('medium'); ?> 
 ```
 
 ### Image tag
 ```php
-<?php echo Acf::get_field('image')->image('medium'); ?>
+<?php echo Acf::getField('image')->image('medium'); ?>
 ```
 
 #### Image tag with attributes, wrapped with link
 ```php
-<a href="<?php echo Acf::get_field('image')->url('full'); ?>">
-  <?php echo Acf::get_field('image')->attributes(['class' => 'w-100'])->image('thumbnail'); ?>
+<a href="<?php echo Acf::getField('image')->url('full'); ?>">
+  <?php echo Acf::getField('image')->attributes(['class' => 'w-100'])->image('thumbnail'); ?>
 </a>
 ```
 
 #### Image with default image from media library, media ID 48
 ```php
-<?php echo Acf::get_field('image')->default(48, 'thumbnail')->image('thumbnail'); ?>
+<?php echo Acf::getField('image')->default(48, 'thumbnail')->image('thumbnail'); ?>
 ```
 
 #### Image with default image from url
 ```php
-<?php echo Acf::get_field('image')->default('https://picsum.photos/150/150')->image('thumbnail'); ?>
+<?php echo Acf::getField('image')->default('https://picsum.photos/150/150')->image('thumbnail'); ?>
 ```
 
 ## Link
 
 ```php
-<?php echo Acf::get_field('link')->link(); // Will output an a-tag with href, target & title ?>
+<?php echo Acf::getField('link')->link(); // Will output an a-tag with href, target & title ?>
 ```
 ```php
-<?php echo Acf::get_field('link')->attributes(['class' => 'btn btn-primary','data-foo' => 'bar'])->link(); ?>
+<?php echo Acf::getField('link')->attributes(['class' => 'btn btn-primary','data-foo' => 'bar'])->link(); ?>
 ```
 ```php
-<a href="<?php echo Acf::get_field('link')->url(); ?>" target="<?php echo Acf::get_field('link')->target(); ?>">
-    <?php echo Acf::get_field('link')->title(); ?>
+<a href="<?php echo Acf::getField('link')->url(); ?>" target="<?php echo Acf::getField('link')->target(); ?>">
+    <?php echo Acf::getField('link')->title(); ?>
 </a>
 ```
 
 ## Repeater
 ```php
 <table class="table">
-  <?php foreach (Acf::get_field('repeater') as $key => $row): ?>
+  <?php foreach (Acf::getField('repeater') as $key => $row): ?>
     <tr>
       <td><?php echo $key; ?></td>
       <td><?php echo $row->get('text'); ?></td>
@@ -135,25 +135,25 @@ Wherever you want to use ACF Objects, import the Otomaties\AcfObjects\Acf class:
 
 ### Repeater array access
 ```php
-<?php if (isset(Acf::get_field('repeater')[0])): ?>
-  <?php echo Acf::get_field('repeater')[0]->get('text'); ?>
+<?php if (isset(Acf::getField('repeater')[0])): ?>
+  <?php echo Acf::getField('repeater')[0]->get('text'); ?>
 <?php endif; ?>
 ```
 
 ## Text
 ```php
-<?php echo Acf::get_field('text'); ?>
+<?php echo Acf::getField('text'); ?>
 ```
 ```php
-<?php echo Acf::get_field('text')->default('Default text'); ?>
+<?php echo Acf::getField('text')->default('Default text'); ?>
 
 ```
 
 ### Text from other post
 ```php
-<?php echo Acf::get_field('text', 51); ?>
+<?php echo Acf::getField('text', 51); ?>
 ```
 
 
 ## ACF Fluent
-During development of this package, I stumbled upon ACF Fluent by samrap, which works great. The biggest difference between ACF Fluent and this package, is the ability to easily display images: ```Acf::get_field('image')->image('thumbnail')``` and a more intuitive way to iterate over repeater & gallery fields.
+During development of this package, I stumbled upon ACF Fluent by samrap, which works great. The biggest difference between ACF Fluent and this package, is the ability to easily display images: ```Acf::getField('image')->image('thumbnail')``` and a more intuitive way to iterate over repeater & gallery fields.
