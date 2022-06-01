@@ -88,11 +88,11 @@ class Acf
      * Find class for field
      *
      * @param mixed $value
-     * @param int|boolean $postId
+     * @param integer|string|null $postId
      * @param array $field
-     * @return mixed
+     * @return Field
      */
-    public static function findClassByFieldType(mixed $value, int|string $postId, array $field)
+    public static function findClassByFieldType(mixed $value, int|string $postId = null, array $field)
     {
         $type = $field['type'];
         $type = str_replace('_', ' ', $type);
