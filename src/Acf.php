@@ -4,6 +4,15 @@ namespace Otomaties\AcfObjects;
 class Acf
 {
     /**
+     * @deprecated Please use getField() instead
+     */
+    public static function get_field(string $selector, $postId = false, bool $formatValue = true) : mixed // phpcs:ignore
+    {
+        trigger_error('Method ' . __METHOD__ . ' is deprecated. Use getField() instead.', E_USER_DEPRECATED);
+        return self::getField($selector, $postId, $formatValue);
+    }
+
+    /**
      * Try to replace ACF's default field array by a custom object
      *
      * @param $selector string the field name or key
@@ -11,13 +20,7 @@ class Acf
      * @param $formatValue boolean whether or not to format the value as described above
      * @return (mixed)
      */
-    public static function get_field(string $selector, mixed $postId = false, bool $formatValue = true) : mixed // phpcs:ignore
-    {
-        trigger_error('Method ' . __METHOD__ . ' is deprecated. Use getField() instead.', E_USER_DEPRECATED);
-        return self::getField($selector, $postId, $formatValue);
-    }
-
-    public static function getField(string $selector, mixed $postId = false, bool $formatValue = true) : mixed
+    public static function getField(string $selector, $postId = false, bool $formatValue = true) : mixed
     {
         $postId = acf_get_valid_post_id($postId);
         $field = acf_maybe_get_field($selector, $postId);

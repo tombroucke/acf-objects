@@ -15,8 +15,18 @@ class Image extends Field
      */
     private ?string $originalUrl = null;
 
+    /**
+     * Image ID
+     *
+     * @var integer
+     */
     private int $id = 0;
 
+    /**
+     * Acf return type
+     *
+     * @var string
+     */
     private string $type = '';
 
    /**
@@ -31,7 +41,13 @@ class Image extends Field
         $this->initProperties($value);
     }
 
-    private function initProperties($value) : void
+    /**
+     * Initialize properties
+     *
+     * @param mixed $value
+     * @return void
+     */
+    private function initProperties(mixed $value) : void
     {
         if (is_numeric($value)) {
             $this->setId($value);
@@ -45,6 +61,12 @@ class Image extends Field
         }
     }
 
+    /**
+     * Set image ID
+     *
+     * @param integer $id
+     * @return void
+     */
     private function setId(int $id)
     {
         $this->id = $id;
@@ -53,19 +75,18 @@ class Image extends Field
     /**
      * Get the image ID
      *
-     * @return int Zero in case ID is unknown
+     * @return int Return image ID, 0 in case ID is unknown
      */
     private function getId() : int
     {
-        // Only in case an ID or array is returned.
         return $this->id;
     }
 
     /**
-     * @deprecated
      * Get the image ID
      *
      * @return int
+     * @deprecated Please use getId() instead
      */
     private function get_ID() : int //phpcs:ignore
     {

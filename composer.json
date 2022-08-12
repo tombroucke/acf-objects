@@ -1,6 +1,14 @@
 {
   "name": "tombroucke/acf-objects",
-  "description": "Make get_field return objects",
+  "description": "Make ACF's get_field return objects with easy-to-use methods",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tom Broucke",
+      "homepage": "https://tombroucke.be"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Otomaties\\AcfObjects\\": "src/"
