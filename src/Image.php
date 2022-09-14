@@ -77,21 +77,9 @@ class Image extends Field
      *
      * @return int Return image ID, 0 in case ID is unknown
      */
-    private function getId() : int
+    public function getId() : int
     {
         return $this->id;
-    }
-
-    /**
-     * Get the image ID
-     *
-     * @return int
-     * @deprecated Please use getId() instead
-     */
-    private function get_ID() : int //phpcs:ignore
-    {
-        trigger_error('Method ' . __METHOD__ . ' is deprecated. Use getId() instead.', E_USER_DEPRECATED);
-        return $this->getId();
     }
 
     /**
