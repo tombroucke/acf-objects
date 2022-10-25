@@ -9,16 +9,17 @@ class Repeater extends ListField
     /**
      * Returns the value (a row) at specified offset.
      *
-     * @param [type] $offset The offset to retrieve.
+     * @param mixed $offset The offset to retrieve.
      * @return Row|null
      */
-    public function offsetGet($offset) : ?Row
+    public function offsetGet(mixed $offset) : ?Row
     {
         if (isset($this->value[$offset])) {
             return new Row($this->value[$offset]);
         }
         return null;
     }
+
     /**
      *
      * Returns the current element.

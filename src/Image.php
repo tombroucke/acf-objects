@@ -127,7 +127,7 @@ class Image extends Field
     public function image(string $size = 'thumbnail') :? string
     {
         if ($this->getId() != 0) {
-            return wp_get_attachment_image($this->getId(), $size, null, $this->attributes);
+            return wp_get_attachment_image($this->getId(), $size, false, $this->attributes);
         }
 
         $imageUrl = $this->url();
@@ -136,6 +136,19 @@ class Image extends Field
             return null;
         }
         return sprintf('<img src="%s"%s />', $imageUrl, $this->attributesString());
+    }
+
+    /**
+     * Get image alt text
+     *
+     * @return string
+     */
+    public function alt() :? string
+    {
+        if ($this->getId() != 0) {
+            return get_post_meta($this->getId(), '_wp_attachment_image_alt', true);
+        }
+        return null;
     }
 
     /**
