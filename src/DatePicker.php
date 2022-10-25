@@ -6,7 +6,7 @@ use Otomaties\AcfObjects\Abstracts\Field;
 
 class DatePicker extends Field
 {
-    private DateTime $date;
+    private bool|DateTime $date;
 
      /**
      * Construct datepicker object
@@ -18,25 +18,27 @@ class DatePicker extends Field
     public function __construct(protected mixed $value, protected mixed $postId = 0, protected array $field = [])
     {
         $date = DateTime::createFromFormat($field['display_format'], $value);
-
-        if (!$date) {
-            throw new \Exception(sprintf('Invalid input value for datepicker: %s', $value));
-        }
         
         $this->date = $date;
     }
 
     public function format(string $format = 'd/m/Y') : string
     {
+        if (!$this->date instanceof DateTime) {
+            throw new \Exception(sprintf('Call to a member function format() on %s', gettype($this->date)));
+        }
         return $this->date->format($format);
     }
 
     public function getTimestamp() : int
     {
+        if (!$this->date instanceof DateTime) {
+            throw new \Exception(sprintf('Call to a member function getTimestamp() on %s', gettype($this->date)));
+        }
         return $this->date->getTimestamp();
     }
 
-    public function dateTime() : DateTime
+    public function dateTime() : bool|DateTime
     {
         return $this->date;
     }
