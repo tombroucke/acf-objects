@@ -6,14 +6,14 @@ class Row
     /**
      * Repeater row
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected array $row = [];
 
     /**
      * Set row
      *
-     * @param array $row
+     * @param array<string, mixed> $row
      */
     public function __construct(array $row = [])
     {

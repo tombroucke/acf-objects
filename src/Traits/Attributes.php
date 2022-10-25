@@ -9,14 +9,14 @@ trait Attributes
     /**
      * The array of attributes
      *
-     * @var array
+     * @var array<string, string>
      */
     protected array $attributes = [];
 
     /**
      * Set attributes
      *
-     * @param array $attributes The array of attributes
+     * @param array<string, string> $attributes The array of attributes
      * @return self
      */
     public function attributes(array $attributes = []) : self

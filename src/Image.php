@@ -34,7 +34,7 @@ class Image extends Field
      *
      * @param mixed $value The field's raw value
      * @param mixed $postId The field's post ID. Zero when field is not for a post
-     * @param array $field The default ACF Field array
+     * @param array<string, mixed> $field The default ACF Field array
      */
     public function __construct(protected mixed $value, protected mixed $postId = 0, protected array $field = [])
     {
@@ -49,10 +49,10 @@ class Image extends Field
      */
     private function initProperties(mixed $value) : void
     {
-        if (is_numeric($value)) {
+        if (is_int($value)) {
             $this->setId($value);
             $this->type = 'id';
-        } elseif (is_array($value) && isset($value['ID']) && is_numeric($value['ID'])) {
+        } elseif (is_array($value) && isset($value['ID']) && is_int($value['ID'])) {
             $this->setId($value['ID']);
             $this->type = 'array';
         } elseif (filter_var($value, FILTER_VALIDATE_URL)) {

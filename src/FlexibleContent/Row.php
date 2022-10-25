@@ -6,7 +6,7 @@ class Row
     /**
      * Set row
      *
-     * @param array $row The ACF Flexible content row
+     * @param array<string, mixed> $row The ACF Flexible content row
      * @return void
      */
     public function __construct(protected array $row = [])

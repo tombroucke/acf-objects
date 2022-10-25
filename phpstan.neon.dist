@@ -3,11 +3,15 @@
 includes:
     - vendor/szepeviktor/phpstan-wordpress/extension.neon
 parameters:
-    level: 5
+    level: 8
     inferPrivatePropertyTypeFromConstructor: true
     bootstrapFiles:
         - vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
     paths:
         - inc/
+    ignoreErrors:
+        - '#Call to an undefined method RecursiveIterator::offsetSet\(\)#'
+        - '#Call to an undefined method RecursiveIterator::getArrayCopy\(\)#'
+    checkGenericClassInNonGenericObjectType: false
 
 # See full example in phpstan-full.neon

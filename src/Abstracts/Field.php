@@ -6,16 +6,16 @@ abstract class Field
     /**
      * The default value for this field
      *
-     * @var string|array
+     * @var mixed
      */
-    protected $default = '';
+    protected $default;
 
     /**
      * Set ACF Field object's value, post ID and field
      *
      * @param mixed $value The field's raw value
      * @param mixed $postId The field's post ID. Zero when field is not for a post
-     * @param array $field The default ACF Field array
+     * @param array<string, mixed> $field The default ACF Field array
      */
     public function __construct(protected mixed $value, protected mixed $postId = 0, protected array $field = [])
     {

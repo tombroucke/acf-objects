@@ -6,7 +6,7 @@ class Acf
     /**
      * @deprecated Please use getField() instead
      */
-    public static function get_field(string $selector, $postId = false, bool $formatValue = true) : mixed // phpcs:ignore
+    public static function get_field(string $selector, mixed $postId = false, bool $formatValue = true) : mixed // phpcs:ignore
     {
         trigger_error('Method ' . __METHOD__ . ' is deprecated. Use getField() instead.', E_USER_DEPRECATED);
         return self::getField($selector, $postId, $formatValue);
@@ -20,7 +20,7 @@ class Acf
      * @param $formatValue boolean whether or not to format the value as described above
      * @return (mixed)
      */
-    public static function getField(string $selector, $postId = false, bool $formatValue = true) : mixed
+    public static function getField(string $selector, mixed $postId = false, bool $formatValue = true) : mixed
     {
         $postId = acf_get_valid_post_id($postId);
         $field = acf_maybe_get_field($selector, $postId);
@@ -60,15 +60,15 @@ class Acf
     /**
      * Add ['return_object'] to each child
      *
-     * @param array $array
-     * @return array The array with added return_object keys
+     * @param array<string, mixed> $array
+     * @return array<string, mixed> The array with added return_object keys
      */
-    public static function recursiveAddReturnObject(array $array)
+    public static function recursiveAddReturnObject(array $array) : array
     {
         $arrayIterator     = new \RecursiveArrayIterator($array);
         $recursiveIterator = new \RecursiveIteratorIterator($arrayIterator, \RecursiveIteratorIterator::SELF_FIRST);
 
-        foreach ($recursiveIterator as $key => $value) {
+        foreach ($recursiveIterator as $value) {
             if (is_array($value) && isset($value['key'])) {
                 $value['return_object'] = true;
 
@@ -92,10 +92,10 @@ class Acf
      *
      * @param mixed $value
      * @param integer|string|null $postId
-     * @param array $field
-     * @return Field
+     * @param array<string, mixed> $field
+     * @return mixed
      */
-    public static function findClassByFieldType(mixed $value, int|string $postId = null, array $field)
+    public static function findClassByFieldType(mixed $value, int|string $postId = null, array $field) : mixed
     {
         $type = $field['type'];
         $type = str_replace('_', ' ', $type);

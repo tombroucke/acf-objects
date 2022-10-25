@@ -6,27 +6,46 @@ use Otomaties\AcfObjects\Abstracts\Field;
 class GoogleMap extends Field
 {
 
-    private $lat;
-    private $lng;
-    private $address;
-    private $name;
-    private $streetName;
-    private $streetNumber;
-    private $city;
-    private $state;
-    private $stateShort;
-    private $postcode;
-    private $country;
-    private $countryShort;
-    private $zoom;
-    private $defaults = null;
+    private ?float $lat;
+    private ?float $lng;
+    private ?string $address;
+    private ?string $name;
+    private ?string $streetName;
+    private ?string $streetNumber;
+    private ?string $city;
+    private ?string $state;
+    private ?string $stateShort;
+    private ?string $postcode;
+    private ?string $country;
+    private ?string $countryShort;
+    private ?int $zoom;
 
+    /**
+     * Map defaults
+     *
+     * @var array<string, string>
+     */
+    private array $defaults = [];
+
+    /**
+     * Construct the object
+     *
+     * @param mixed $value The field's raw value
+     * @param mixed $postId The field's post ID. Zero when field is not for a post
+     * @param array<string, mixed> $field The default ACF Field array
+     */
     public function __construct(protected mixed $value, protected mixed $postId = 0, protected array $field = [])
     {
         $this->initProperties($value);
     }
 
-    public function initProperties($value)
+    /**
+     * Initialize properties from acf field value
+     *
+     * @param array<string, mixed> $value
+     * @return void
+     */
+    public function initProperties(array $value) : void
     {
         $this->lat = isset($value['lat']) ? $value['lat'] : null;
         $this->lng = isset($value['lng']) ? $value['lng'] : null;
@@ -69,7 +88,7 @@ class GoogleMap extends Field
         return $this;
     }
 
-    private function getDefault($key) : mixed
+    private function getDefault(string $key) : mixed
     {
         return isset($this->defaults[$key]) ? $this->defaults[$key] : null;
     }

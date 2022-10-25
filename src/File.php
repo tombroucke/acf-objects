@@ -137,6 +137,11 @@ class File extends Field
         return isset($this->value['height']) ? $this->value['height'] : null;
     }
 
+    /**
+     * Get image sizes
+     *
+     * @return array<string, string>|null
+     */
     public function sizes() : ?array
     {
         return isset($this->value['sizes']) ? $this->value['sizes'] : null;
@@ -149,6 +154,6 @@ class File extends Field
      */
     public function __toString() : string
     {
-        return $this->url();
+        return $this->url() ?? '';
     }
 }

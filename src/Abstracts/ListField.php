@@ -10,7 +10,7 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
     /**
      * Get field value
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function value() : array
     {
