@@ -8,7 +8,7 @@ abstract class Field
      *
      * @var mixed
      */
-    protected $default;
+    protected $default = '';
 
     /**
      * Set ACF Field object's value, post ID and field
