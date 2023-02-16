@@ -30,4 +30,27 @@ class Row
     {
         return isset($this->row[$key]) ? $this->row[$key] : null;
     }
+
+    /**
+     * Set sub field value
+     *
+     * @param string $key The sub field key
+     * @param mixed $value The sub field value
+     * @return Row
+     */
+    public function set(string $key, mixed $value) : Row
+    {
+        $this->row[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * Get row value
+     *
+     * @return array<string, mixed>
+     */
+    public function value() : array
+    {
+        return $this->row;
+    }
 }

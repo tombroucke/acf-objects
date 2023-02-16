@@ -1,6 +1,8 @@
 <?php
 namespace Otomaties\AcfObjects\Abstracts;
 
+use Otomaties\AcfObjects\Repeater\Row;
+
 /**
  * A Listfield is a field which behaves like an array
  */
@@ -138,5 +140,35 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
     public function count() : int
     {
         return count($this->value());
+    }
+
+    /**
+     * Filter the list
+     *
+     * @param callable $filterFunction
+     * @return static
+     */
+    public function filter(callable $filterFunction) : static
+    {
+        foreach ($this->value as $key => $item) {
+            if (!$filterFunction(new Row($item))) {
+                unset($this->value[$key]);
+            }
+        }
+        return new static($this->value);
+    }
+
+    /**
+     * Map the list
+     *
+     * @param callable $mapFunction
+     * @return static
+     */
+    public function map(callable $mapFunction) : static
+    {
+        foreach ($this->value as $key => $item) {
+            $this->value[$key] = $mapFunction(new Row($item))->value();
+        }
+        return new static($this->value);
     }
 }

@@ -12,6 +12,7 @@ parameters:
     ignoreErrors:
         - '#Call to an undefined method RecursiveIterator::offsetSet\(\)#'
         - '#Call to an undefined method RecursiveIterator::getArrayCopy\(\)#'
+        - "#^Unsafe usage of new static#"
     checkGenericClassInNonGenericObjectType: false
 
 # See full example in phpstan-full.neon
