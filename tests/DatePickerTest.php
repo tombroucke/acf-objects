@@ -2,7 +2,7 @@
 use PHPUnit\Framework\TestCase;
 use Otomaties\AcfObjects\DatePicker;
 
-final class DatepickerTest extends TestCase
+final class DatePickerTest extends TestCase
 {
     private $field = [
         "ID" => 223,

@@ -10,8 +10,6 @@ parameters:
     paths:
         - inc/
     ignoreErrors:
-        - '#Call to an undefined method RecursiveIterator::offsetSet\(\)#'
-        - '#Call to an undefined method RecursiveIterator::getArrayCopy\(\)#'
         - "#^Unsafe usage of new static#"
     checkGenericClassInNonGenericObjectType: false
 

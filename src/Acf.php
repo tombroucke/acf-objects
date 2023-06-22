@@ -58,33 +58,21 @@ class Acf
     }
 
     /**
-     * Add ['return_object'] to each child
+     * Add 'return_object' => '1' to each sub_field recursively
      *
-     * @param array<string, mixed> $array
-     * @return array<string, mixed> The array with added return_object keys
+     * @param array<string, mixed> $field
+     * @return array<string, mixed> The field array with added return_object keys
      */
-    public static function recursiveAddReturnObject(array $array) : array
+    public static function recursiveAddReturnObject(array $field) : array
     {
-        $arrayIterator     = new \RecursiveArrayIterator($array);
-        $recursiveIterator = new \RecursiveIteratorIterator($arrayIterator, \RecursiveIteratorIterator::SELF_FIRST);
-
-        foreach ($recursiveIterator as $value) {
-            if (is_array($value) && isset($value['key'])) {
-                $value['return_object'] = true;
-
-                $currentDepth = $recursiveIterator->getDepth();
-                for ($subDepth = $currentDepth; $subDepth >= 0; $subDepth--) {
-                    $subIterator = $recursiveIterator->getSubIterator($subDepth);
-                    $subIterator->offsetSet(
-                        $subIterator->key(),
-                        ($subDepth === $currentDepth ?
-                            $value :
-                            $recursiveIterator->getSubIterator(($subDepth + 1))->getArrayCopy())
-                    );
-                }
+        if (isset($field['sub_fields']) && is_array($field['sub_fields'])) {
+            foreach ($field['sub_fields'] as $key => $subField) {
+                $field['sub_fields'][$key]['return_object'] = true;
+                $field['sub_fields'][$key] = self::recursiveAddReturnObject($field['sub_fields'][$key]);
             }
         }
-        return $recursiveIterator->getArrayCopy();
+
+        return $field;
     }
 
     /**
