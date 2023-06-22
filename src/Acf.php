@@ -1,6 +1,8 @@
 <?php
 namespace Otomaties\AcfObjects;
 
+use Otomaties\AcfObjects\Abstracts\Field;
+
 class Acf
 {
     /**
@@ -23,8 +25,8 @@ class Acf
     public static function getField(string $selector, mixed $postId = false, bool $formatValue = true) : mixed
     {
         $postId = acf_get_valid_post_id($postId);
+        // ray(acf_get_store( 'fields' ));
         $field = acf_maybe_get_field($selector, $postId);
-
         if (! $field) {
             $field = acf_get_valid_field(
                 array(
@@ -40,15 +42,19 @@ class Acf
         $field = self::recursiveAddReturnObject($field);
 
         $value = acf_get_value($postId, $field);
+        
         if ($formatValue) {
+            // to be able to use get_field() and Acf::get_field() at the same time, different data store keys are needed
+            $field['name'] = $field['name'] . ':acf-object';
             $value = acf_format_value($value, $postId, $field);
         }
-
         if (! $value) {
             $field = acf_get_field($selector);
             if ($field) {
                 $field['return_object'] = true;
-                $value = self::findClassByFieldType($value, $postId, $field);
+                $field = self::recursiveAddReturnObject($field);
+                $field['name'] = $field['name'] . ':acf-object';
+                $value = acf_format_value($value, $postId, $field);
             } else {
                 throw new \Exception(sprintf('Field with key %s not found', $selector), 1);
             }
