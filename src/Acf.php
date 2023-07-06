@@ -25,8 +25,8 @@ class Acf
     public static function getField(string $selector, mixed $postId = false, bool $formatValue = true) : mixed
     {
         $postId = acf_get_valid_post_id($postId);
-        // ray(acf_get_store( 'fields' ));
         $field = acf_maybe_get_field($selector, $postId);
+
         if (! $field) {
             $field = acf_get_valid_field(
                 array(
@@ -71,10 +71,17 @@ class Acf
      */
     public static function recursiveAddReturnObject(array $field) : array
     {
-        if (isset($field['sub_fields']) && is_array($field['sub_fields'])) {
-            foreach ($field['sub_fields'] as $key => $subField) {
-                $field['sub_fields'][$key]['return_object'] = true;
-                $field['sub_fields'][$key] = self::recursiveAddReturnObject($field['sub_fields'][$key]);
+        $subFieldKeys = [
+            'sub_fields',
+            'layouts',
+        ];
+
+        foreach ($subFieldKeys as $subFieldKey) {
+            if (isset($field[$subFieldKey]) && is_array($field[$subFieldKey])) {
+                foreach ($field[$subFieldKey] as $key => $subField) {
+                    $field[$subFieldKey][$key]['return_object'] = true;
+                    $field[$subFieldKey][$key] = self::recursiveAddReturnObject($field[$subFieldKey][$key]);
+                }
             }
         }
 
