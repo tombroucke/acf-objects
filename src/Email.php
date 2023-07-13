@@ -8,4 +8,8 @@ use Otomaties\AcfObjects\Abstracts\Field;
  */
 class Email extends Field
 {
+    public function obfuscate() : string
+    {
+        return antispambot($this->value);
+    }
 }
