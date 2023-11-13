@@ -171,4 +171,14 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
         }
         return new static($this->value);
     }
+    
+    /**
+     * Reverse the list
+     *
+     * @return static
+     */
+    public function reverse() : static
+    {
+        return new static(array_reverse($this->value));
+    }
 }

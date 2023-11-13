@@ -27,4 +27,10 @@ final class RepeaterTest extends TestCase
     {
         $this->assertInstanceOf(Row::class, $this->repeater[0]);
     }
+
+    public function testRepeaterArrayIsReversible()
+    {
+        $reversedListField = $this->repeater->reverse();
+        $this->assertEquals(array_reverse($this->repeaterArray), $reversedListField->value());
+    }
 }
