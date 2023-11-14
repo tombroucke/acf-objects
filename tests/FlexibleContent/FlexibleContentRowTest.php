@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use Otomaties\AcfObjects\FlexibleContent\Row;
+use Otomaties\AcfObjects\Exceptions\InvalidSubFieldException;
 
 final class FlexibleContentRowTest extends TestCase
 {
@@ -16,7 +17,11 @@ final class FlexibleContentRowTest extends TestCase
 
     public function testGetValue() {
         $this->assertEquals('value', $this->row->get('key'));
-        $this->assertNull($this->row->get('undefined_key'));
+    }
+
+    public function testGetUndefinedValue() {
+        $this->expectException(InvalidSubFieldException::class);
+        $this->row->get('undefined_key');
     }
 
     public function testGetLayout() {

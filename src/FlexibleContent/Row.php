@@ -1,6 +1,8 @@
 <?php
 namespace Otomaties\AcfObjects\FlexibleContent;
 
+use Otomaties\AcfObjects\Exceptions\InvalidSubFieldException;
+
 class Row
 {
     /**
@@ -21,7 +23,13 @@ class Row
      */
     public function get(string $key) : mixed
     {
-        return isset($this->row[$key]) ? $this->row[$key] : null;
+        if (!isset($this->row[$key])) {
+            $possibleKeys = array_keys($this->row);
+            throw new InvalidSubFieldException(
+                sprintf('Sub field %s does not exist. Possible keys are: %s', $key, implode(', ', $possibleKeys))
+            );
+        }
+        return $this->row[$key];
     }
 
     /**

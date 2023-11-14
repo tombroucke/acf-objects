@@ -42,4 +42,9 @@ class DatePicker extends Field
     {
         return $this->date;
     }
+
+    public function __toString() : string
+    {
+        return $this->format(get_option('date_format'));
+    }
 }

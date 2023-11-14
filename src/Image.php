@@ -9,13 +9,6 @@ class Image extends Field
     use Attributes;
 
     /**
-     * The image URL
-     *
-     * @var string|null
-     */
-    private ?string $originalUrl = null;
-
-    /**
      * Image ID
      *
      * @var integer
@@ -56,8 +49,9 @@ class Image extends Field
             $this->setId($value['ID']);
             $this->type = 'array';
         } elseif (filter_var($value, FILTER_VALIDATE_URL)) {
-            $this->originalUrl = $value;
-            $this->type = 'external';
+            $this->type = 'string';
+        } else {
+            $this->type = 'undefined';
         }
     }
 
@@ -91,10 +85,13 @@ class Image extends Field
      */
     public function default($default, string $size = 'thumbnail') : Image
     {
+        if ($this->value) {
+            return $this;
+        }
         if (is_int($default)) {
-            $this->default = wp_get_attachment_image_url($default, $size);
+            $this->value = wp_get_attachment_image_url($default, $size);
         } elseif (is_string($default)) {
-            $this->default = $default;
+            $this->value = $default;
         }
         return $this;
     }
@@ -107,13 +104,16 @@ class Image extends Field
      */
     public function url(string $size = 'thumbnail') :? string
     {
-        $url = null;
-        if ($this->type == 'external') {
-            $url = $this->originalUrl;
-        } elseif ($this->getId() != 0) {
-            $url = wp_get_attachment_image_url($this->getId(), $size);
-        } elseif ($this->default) {
-            $url = $this->default;
+        switch ($this->type) {
+            case 'id':
+            case 'array':
+                $url = wp_get_attachment_image_url($this->getId(), $size);
+                break;
+            case 'string':
+                $url = $this->value;
+                break;
+            default:
+                $url = $this->value() ?: null;
         }
         return $url;
     }

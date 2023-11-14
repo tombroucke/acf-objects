@@ -1,15 +1,10 @@
 <?php
 namespace Otomaties\AcfObjects\Abstracts;
 
-abstract class Field
-{
-    /**
-     * The default value for this field
-     *
-     * @var mixed
-     */
-    protected $default = '';
+use JsonSerializable;
 
+abstract class Field implements JsonSerializable
+{
     /**
      * Set ACF Field object's value, post ID and field
      *
@@ -32,14 +27,16 @@ abstract class Field
     }
 
     /**
-     * Set a default value
+     * Set a default value if field is empty
      *
      * @param mixed $default
      * @return Field
      */
     public function default($default) : Field
     {
-        $this->default = $default;
+        if (!$this->value) {
+            $this->value = $default;
+        }
         return $this;
     }
 
@@ -62,7 +59,7 @@ abstract class Field
      */
     public function isEmpty() : bool
     {
-        return empty($this->value);
+        return empty($this->value());
     }
 
     /**
@@ -72,7 +69,7 @@ abstract class Field
      */
     public function isSet() : bool
     {
-        return ! $this->isEmpty();
+        return !$this->isEmpty();
     }
 
     /**
@@ -82,9 +79,16 @@ abstract class Field
      */
     public function __toString() : string
     {
-        if (! $this->value()) {
-            return $this->default;
-        }
-        return $this->value();
+        return (string)$this->value();
+    }
+
+    /**
+     * Get fields to serialize
+     *
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize() : array
+    {
+        return get_object_vars($this);
     }
 }

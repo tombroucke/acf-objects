@@ -10,13 +10,25 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
 {
 
     /**
+     * Set ACF Field object's value, post ID and field
+     *
+     * @param mixed $value The field's raw value
+     * @param mixed $postId The field's post ID. Zero when field is not for a post
+     * @param array<string, mixed> $field The default ACF Field array
+     */
+    public function __construct(mixed $value, mixed $postId = 0, array $field = [])
+    {
+        parent::__construct($value ?: [], $postId, $field);
+    }
+
+    /**
      * Get field value
      *
      * @return array<string, mixed>
      */
     public function value() : array
     {
-        return is_array($this->value) ? $this->value : [];
+        return $this->value ?: [];
     }
 
     /**
@@ -155,7 +167,7 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
                 unset($this->value[$key]);
             }
         }
-        return new static($this->value);
+        return $this;
     }
 
     /**
@@ -169,16 +181,28 @@ abstract class ListField extends Field implements \ArrayAccess, \Iterator, \Coun
         foreach ($this->value as $key => $item) {
             $this->value[$key] = $mapFunction(new Row($item))->value();
         }
-        return new static($this->value);
+        return $this;
     }
-    
+
     /**
      * Reverse the list
      *
-     * @return static
+     * @return ListField
      */
-    public function reverse() : static
+    public function reverse() : ListField
     {
-        return new static(array_reverse($this->value));
+        $this->value = array_reverse($this->value);
+        return $this;
+    }
+
+    /**
+     * Convert to array
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray() : array
+    {
+        $jsonEncodedValue = json_encode($this->value());
+        return $jsonEncodedValue ? json_decode($jsonEncodedValue, true) : [];
     }
 }
