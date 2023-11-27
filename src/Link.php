@@ -16,7 +16,7 @@ class Link extends Field
      */
     public function url() : ?string
     {
-        return isset($this->value()['url']) ? esc_url($this->value()['url']) : null;
+        return $this->value()['url'] ?? null;
     }
 
     /**
