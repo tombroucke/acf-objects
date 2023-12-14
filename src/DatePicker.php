@@ -45,6 +45,6 @@ class DatePicker extends Field
 
     public function __toString() : string
     {
-        return $this->format(get_option('date_format'));
+        return date_i18n(get_option('date_format'), $this->getTimestamp());
     }
 }
