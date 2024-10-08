@@ -1,4 +1,5 @@
 <?php
+
 namespace Otomaties\AcfObjects\Traits;
 
 /**
@@ -16,44 +17,38 @@ trait Attributes
     /**
      * Set attributes
      *
-     * @param array<string, string> $attributes The array of attributes
-     * @return self
+     * @param  array<string, string>  $attributes  The array of attributes
      */
-    public function attributes(array $attributes = []) : self
+    public function attributes(array $attributes = []): self
     {
         foreach ($attributes as $key => $value) {
-            $this->attributes[ $key ] = $value;
+            $this->attributes[$key] = $value;
         }
+
         return $this;
     }
 
     /**
      * Get defined attribute
-     *
-     * @param string $key
-     * @return string|null
      */
-    public function getAttribute(string $key) : ?string
+    public function getAttribute(string $key): ?string
     {
         return isset($this->attributes[$key]) ? $this->attributes[$key] : null;
     }
 
     /**
      * Convert attribute array to string for output
-     *
-     * @return string
      */
-    private function attributesString() : string
+    private function attributesString(): string
     {
         if (empty($this->attributes)) {
             return '';
         }
-        return ' ' . implode(' ', array_map(
-            function ($attribute, $value) {
-                return $attribute .'="'. htmlspecialchars($value) .'"';
-            },
-            array_keys($this->attributes),
-            $this->attributes
-        ));
+
+        return collect($this->attributes)
+            ->map(function ($value, $key) {
+                return $key.'="'.htmlspecialchars($value).'"';
+            })
+            ->implode(' ');
     }
 }

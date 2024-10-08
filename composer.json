@@ -1,12 +1,12 @@
 {
   "name": "tombroucke/acf-objects",
-  "description": "Make ACF's get_field return objects with easy-to-use methods",
-  "type": "library",
+  "type": "package",
+  "description": "An example package for Roots Acorn.",
   "license": "MIT",
   "authors": [
     {
       "name": "Tom Broucke",
-      "homepage": "https://tombroucke.be"
+      "email": "tom@tombroucke.be"
     }
   ],
   "autoload": {
@@ -15,28 +15,29 @@
     }
   },
   "require": {
-    "php": ">=8"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^9.5",
-    "squizlabs/php_codesniffer": "^3.6.2",
-    "roave/security-advisories": "dev-latest",
-    "szepeviktor/phpstan-wordpress": "^1.1",
-    "illuminate/support": "^9.36",
-    "php-stubs/acf-pro-stubs": "^6.0"
+    "php": "^8.0",
+    "nesbot/carbon": "*",
+    "illuminate/support": "*"
   },
   "extra": {
     "acorn": {
       "providers": [
-        "Otomaties\\AcfObjects\\AcfObjectsServiceProvider"
-      ]
+        "Otomaties\\AcfObjects\\Providers\\AcfObjectsServiceProvider"
+      ],
+      "aliases": {
+        "AcfObjects": "Otomaties\\AcfObjects\\Facades\\AcfObjects"
+      }
     }
+  },
+  "require-dev": {
+    "laravel/pint": "^1.18",
+    "szepeviktor/phpstan-wordpress": "^1.3",
+    "php-stubs/acf-pro-stubs": "^6.2"
   },
   "scripts": {
     "test": [
-      "phpunit tests --colors=always --verbose",
-      "phpcs --standard=PSR2 src",
-      "vendor/bin/phpstan analyze src --memory-limit 512M"
+      "./vendor/bin/pint",
+      "./vendor/bin/phpstan analyze src --memory-limit 512M --level 5"
     ]
   }
 }

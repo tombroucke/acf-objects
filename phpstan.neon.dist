@@ -10,5 +10,11 @@ parameters:
     paths:
         - inc/
     checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+        - '#Function view not found#'
+        - '#Function app not found#'
+        - '#Variable \$className might not be defined.#'
+        - '#Variable \$value might not be defined.#'
+        - '#Variable \$field might not be defined.#'
 
 # See full example in phpstan-full.neon

@@ -1,4 +1,5 @@
 <?php
+
 namespace Otomaties\AcfObjects\Traits;
 
 /**
@@ -8,11 +9,17 @@ trait Stringable
 {
     /**
      * Convert to string
-     *
-     * @return string
      */
-    public function toString() : string
+    public function toString(): string
     {
         return $this->__toString();
+    }
+
+    /**
+     * Convert to string
+     */
+    public function __toString(): string
+    {
+        return (string) $this->value;
     }
 }
