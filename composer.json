@@ -1,7 +1,7 @@
 {
   "name": "tombroucke/acf-objects",
   "type": "package",
-  "description": "An example package for Roots Acorn.",
+  "description": "Convert return values from get_field() to objects with easy-to-use methods",
   "license": "MIT",
   "authors": [
     {
