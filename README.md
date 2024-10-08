@@ -149,7 +149,7 @@ AcfObjects::getField('repeater')
 @unless(AcfObjects::getField('repeater')->isEmpty())
 <ul>
   @foreach(AcfObjects::getField('repeater') as $item)
-    <li>{!! $item['name] !!}</li>
+    <li>{!! $item['name'] !!}</li>
   @endforeach
 </ul>
 @endunless
