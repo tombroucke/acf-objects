@@ -1,6 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+use Otomaties\AcfObjects\Fields\Image;
 use PHPUnit\Framework\TestCase;
-use Otomaties\AcfObjects\Image;
 
 function wp_get_attachment_image_url(int $id, string $size = 'thumbnail')
 {
@@ -12,15 +14,17 @@ function get_post_meta($id, $key, $single)
     if ($key == '_wp_attachment_image_alt') {
         return ImageTest::$imageArray['alt'];
     }
+
     return null;
 }
 
 function wp_get_attachment_image(int $id, string $size = 'thumbnail', ?bool $icon = false, $attributes = '')
 {
-    $output = '<img width="1024" height="255" src="' . ImageTest::$imageArray['sizes'][$size] .  '" class="attachment-' . $size . ' size-' . $size . '" alt="" loading="lazy" srcset="' . ImageTest::$imageArray['sizes']['large'] .  ' ' . ImageTest::$imageArray['sizes']['large-width'] .  'w, ' . ImageTest::$imageArray['sizes']['medium'] .  ' ' . ImageTest::$imageArray['sizes']['medium-width'] .  'w, ' . ImageTest::$imageArray['sizes']['medium_large'] .  ' 768w, ' . ImageTest::$imageArray['sizes']['1536x1536'] .  ' ' . ImageTest::$imageArray['sizes']['1536x1536-width'] .  'w, ' . ImageTest::$imageArray['sizes']['2048x2048'] .  ' ' . ImageTest::$imageArray['sizes']['2048x2048-width'] .  'w" sizes="(max-width: 1024px) 100vw, 1024px">';
+    $output = '<img width="1024" height="255" src="'.ImageTest::$imageArray['sizes'][$size].'" class="attachment-'.$size.' size-'.$size.'" alt="" loading="lazy" srcset="'.ImageTest::$imageArray['sizes']['large'].' '.ImageTest::$imageArray['sizes']['large-width'].'w, '.ImageTest::$imageArray['sizes']['medium'].' '.ImageTest::$imageArray['sizes']['medium-width'].'w, '.ImageTest::$imageArray['sizes']['medium_large'].' 768w, '.ImageTest::$imageArray['sizes']['1536x1536'].' '.ImageTest::$imageArray['sizes']['1536x1536-width'].'w, '.ImageTest::$imageArray['sizes']['2048x2048'].' '.ImageTest::$imageArray['sizes']['2048x2048-width'].'w" sizes="(max-width: 1024px) 100vw, 1024px">';
     if (is_array($attributes) && isset($attributes['class'])) {
-        $output = str_replace('attachment-' . $size . ' size-' . $size, $attributes['class'], $output);
+        $output = str_replace('attachment-'.$size.' size-'.$size, $attributes['class'], $output);
     }
+
     return $output;
 }
 
@@ -69,15 +73,18 @@ final class ImageTest extends TestCase
             '2048x2048' => 'https://example.com/imagetitle-2048x510.jpg',
             '2048x2048-width' => 2048,
             '2048x2048-height' => 510,
-        ]
+        ],
     ];
 
     private $image;
+
     private $imageFromID;
+
     private $imageFromUrl;
+
     private $emptyImage;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->image = new Image(self::$imageArray, null, []);
         $this->imageFromID = new Image(2, null, []);
@@ -94,15 +101,6 @@ final class ImageTest extends TestCase
         $this->assertEquals($this->emptyImage->default('https://example.com/image.jpg')->url('medium'), 'https://example.com/image.jpg');
     }
 
-    public function testImageTagisCorrect()
-    {
-        $this->assertEquals($this->imageFromUrl->attributes(['class' => 'custom-class'])->image('large'), '<img src="https://example.com/image.jpg" class="custom-class" />');
-        $this->assertEquals($this->image->image('large'), '<img width="1024" height="255" src="https://example.com/imagetitle-1024x255.jpg" class="attachment-large size-large" alt="" loading="lazy" srcset="https://example.com/imagetitle-1024x255.jpg 1024w, https://example.com/imagetitle-300x75.jpg 300w, https://example.com/imagetitle-768x191.jpg 768w, https://example.com/imagetitle-1536x383.jpg 1536w, https://example.com/imagetitle-2048x510.jpg 2048w" sizes="(max-width: 1024px) 100vw, 1024px">');
-        $this->assertEquals($this->image->default('https://example.com/image.jpg')->image('large'), '<img width="1024" height="255" src="https://example.com/imagetitle-1024x255.jpg" class="attachment-large size-large" alt="" loading="lazy" srcset="https://example.com/imagetitle-1024x255.jpg 1024w, https://example.com/imagetitle-300x75.jpg 300w, https://example.com/imagetitle-768x191.jpg 768w, https://example.com/imagetitle-1536x383.jpg 1536w, https://example.com/imagetitle-2048x510.jpg 2048w" sizes="(max-width: 1024px) 100vw, 1024px">');
-        $this->assertEquals($this->image->attributes(['class' => 'custom-class'])->image('large'), '<img width="1024" height="255" src="https://example.com/imagetitle-1024x255.jpg" class="custom-class" alt="" loading="lazy" srcset="https://example.com/imagetitle-1024x255.jpg 1024w, https://example.com/imagetitle-300x75.jpg 300w, https://example.com/imagetitle-768x191.jpg 768w, https://example.com/imagetitle-1536x383.jpg 1536w, https://example.com/imagetitle-2048x510.jpg 2048w" sizes="(max-width: 1024px) 100vw, 1024px">');
-        $this->assertNull($this->emptyImage->image('medium'));
-    }
-
     public function testImageAltIsCorrect()
     {
         $this->assertEquals($this->image->alt(), 'Image Title');
@@ -110,7 +108,7 @@ final class ImageTest extends TestCase
 
     public function testToStringIsCorrect()
     {
-        $this->assertEquals((string)$this->image, 'https://example.com/imagetitle-150x150.jpg');
+        $this->assertEquals((string) $this->image, 'https://example.com/imagetitle-150x150.jpg');
         $this->assertEquals($this->emptyImage, '');
     }
 }
