@@ -176,7 +176,7 @@ AcfObjects::getField('repeater')
 {{ AcfObjects::getField('text_area') }}
 ```
 
-## Upgrade guide
+## Upgrading to v4.x from v3.x
 
 ### Use new facade
 
