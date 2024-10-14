@@ -175,3 +175,33 @@ AcfObjects::getField('repeater')
 ```blade
 {{ AcfObjects::getField('text_area') }}
 ```
+
+## Upgrade guide
+
+### Use new facade
+
+```diff
+- Acf::getField(
++ AcfObjects::getField(
+```
+
+### Use new facade and remove deprecated get_field method
+
+```diff
+- Acf::get_field(
++ AcfObjects::getField(
+```
+
+### Use new facade
+
+```diff
+- use Otomaties\AcfObjects\Acf;
++ use Otomaties\AcfObjects\Facades\AcfObjects;
+```
+
+### Array access for repeaters instead of the `get()` method.
+
+```diff
+- $repeater->get('sub_field')
++ $repeater['sub_field']
+```
