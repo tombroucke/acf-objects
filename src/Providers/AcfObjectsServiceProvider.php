@@ -30,6 +30,7 @@ class AcfObjectsServiceProvider extends ServiceProvider
          */
         $this->app->bind('acf-objects.field', function ($app, $parameters) {
             extract($parameters);
+
             if (! class_exists($className)) {
                 $className = FallbackField::class;
             }
@@ -70,6 +71,11 @@ class AcfObjectsServiceProvider extends ServiceProvider
 
         add_filter('acf/format_value', function ($value, $postId, $field) {
             if (($field['return_object'] ?? false) === false) {
+                return $value;
+            }
+
+            $excludeTypes = ['true_false'];
+            if (in_array($field['type'], $excludeTypes)) {
                 return $value;
             }
 

@@ -9,6 +9,7 @@ trait FetchesArrayValues
     public function __call(string $name, mixed $arguments): mixed
     {
         $snakeName = Str::snake($name);
+
         if (! $this->value) {
             return null;
         }

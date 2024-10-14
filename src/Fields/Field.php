@@ -8,6 +8,11 @@ abstract class Field implements FieldContract
 {
     public function __construct(protected mixed $value) {}
 
+    public function getValue(): mixed
+    {
+        return $this->value;
+    }
+
     public function isSet(): bool
     {
         return isset($this->value) && ! empty($this->value);

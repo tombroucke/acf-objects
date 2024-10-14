@@ -7,6 +7,11 @@ use Otomaties\AcfObjects\Contracts\FieldContract;
 
 class DateTimePicker extends Carbon implements FieldContract
 {
+    public function getValue(): mixed
+    {
+        return $this;
+    }
+
     public function isSet(): bool
     {
         return true;

@@ -7,6 +7,11 @@ use Otomaties\AcfObjects\Contracts\CollectionContract;
 
 abstract class Collection extends SupportCollection implements CollectionContract
 {
+    public function getValue(): mixed
+    {
+        return $this->items;
+    }
+
     public function default(mixed $value): CollectionContract
     {
         if ($this->isEmpty()) {

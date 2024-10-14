@@ -14,7 +14,7 @@ class AcfObjects
      * @param  $postId  mixed the post_id of which the value is saved against
      * @param  $formatValue  boolean whether or not to format the value as described above
      */
-    public function getField(string $selector, mixed $postId = false, bool $formatValue = true): FieldContract|CollectionContract
+    public function getField(string $selector, mixed $postId = false, bool $formatValue = true): FieldContract|CollectionContract|bool
     {
         $postId = acf_get_valid_post_id($postId);
         $field = acf_maybe_get_field($selector, $postId);
