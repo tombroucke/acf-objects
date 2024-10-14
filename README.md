@@ -84,6 +84,15 @@ When getting the value for a Group field, an `Illuminate/Support/Collection` wil
 
 ### Group
 
+```php
+  $settings = AcfObjects::getField('settings')
+    ->default([
+      'foo' => 'bar'
+    ]);
+
+  echo $settings->get('foo');
+```
+
 ```blade
 {{ AcfObjects::getField('settings')->get('name') }}
 ```
