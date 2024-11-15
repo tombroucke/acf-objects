@@ -8,7 +8,19 @@ abstract class Field implements FieldContract
 {
     public function __construct(protected mixed $value) {}
 
+    /**
+     * @deprecated 3.1.2 Use value() instead.
+     */
     public function getValue(): mixed
+    {
+        trigger_error(
+            'Method getValue() is deprecated since version 3.1.2 and will be removed in future versions. Use value() instead.',
+            E_USER_DEPRECATED
+        );
+        return $this->value();
+    }
+
+    public function value(): mixed
     {
         return $this->value;
     }
