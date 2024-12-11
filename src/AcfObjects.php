@@ -2,9 +2,6 @@
 
 namespace Otomaties\AcfObjects;
 
-use Otomaties\AcfObjects\Contracts\CollectionContract;
-use Otomaties\AcfObjects\Contracts\FieldContract;
-
 class AcfObjects
 {
     /**
@@ -14,7 +11,7 @@ class AcfObjects
      * @param  $postId  mixed the post_id of which the value is saved against
      * @param  $formatValue  boolean whether or not to format the value as described above
      */
-    public function getField(string $selector, mixed $postId = false, bool $formatValue = true): FieldContract|CollectionContract|bool
+    public function getField(string $selector, mixed $postId = false, bool $formatValue = true): mixed
     {
         $postId = acf_get_valid_post_id($postId);
         $field = acf_maybe_get_field($selector, $postId);

@@ -9,7 +9,6 @@ parameters:
         - vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
     paths:
         - inc/
-    checkGenericClassInNonGenericObjectType: false
     ignoreErrors:
         - '#Function view not found#'
         - '#Function app not found#'
