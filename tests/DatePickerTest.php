@@ -41,7 +41,7 @@ final class DatePickerTest extends TestCase
         $this->datePicker = DatePicker::createFromFormat('d/m/Y', '29/10/2022');
     }
 
-    public function testCanBeCreated(): void
+    public function test_can_be_created(): void
     {
         $this->assertInstanceOf(
             DatePicker::class,
@@ -49,7 +49,7 @@ final class DatePickerTest extends TestCase
         );
     }
 
-    public function testDateCanBeFormatted(): void
+    public function test_date_can_be_formatted(): void
     {
         $this->assertEquals(
             '2022-10-29',
@@ -57,7 +57,7 @@ final class DatePickerTest extends TestCase
         );
     }
 
-    public function testTimeStampsCanBeReturned(): void
+    public function test_time_stamps_can_be_returned(): void
     {
         $this->assertIsInt(
             $this->datePicker->getTimestamp()

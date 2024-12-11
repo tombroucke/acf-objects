@@ -31,37 +31,37 @@ final class LinkTest extends TestCase
         $linkArray = $this->linkArray;
     }
 
-    public function testUrlIsCorrect()
+    public function test_url_is_correct()
     {
         $this->assertIsString($this->link->url());
         $this->assertEquals($this->link->url(), $this->linkArray['url']);
         $this->assertNull($this->emptyLink->url());
     }
 
-    public function testTitleIsCorrect()
+    public function test_title_is_correct()
     {
         $this->assertIsString($this->link->title());
         $this->assertEquals($this->link->title(), $this->linkArray['title']);
         $this->assertNull($this->emptyLink->title());
     }
 
-    public function testTargetReturnTypeIsCorrect()
+    public function test_target_return_type_is_correct()
     {
         $this->assertIsString($this->link->target());
         $this->assertNull($this->emptyLink->target());
     }
 
-    public function testTargetIsCorrect()
+    public function test_target_is_correct()
     {
         $this->assertEquals($this->link->target(), $this->linkArray['target']);
     }
 
-    public function testLinkisCorrect()
+    public function test_linkis_correct()
     {
         $this->assertEquals($this->emptyLink->title(), '');
     }
 
-    public function testToStringIsCorrect()
+    public function test_to_string_is_correct()
     {
         $this->assertEquals($this->link, $this->linkArray['url']);
         $this->assertEquals($this->emptyLink, '');

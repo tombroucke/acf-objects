@@ -92,7 +92,7 @@ final class ImageTest extends TestCase
         $this->emptyImage = new Image(false, null, []);
     }
 
-    public function testUrlIsCorrect()
+    public function test_url_is_correct()
     {
         $this->assertEquals($this->image->url('medium'), 'https://example.com/imagetitle-300x75.jpg');
         $this->assertEquals($this->imageFromUrl->url('medium'), 'https://example.com/image.jpg');
@@ -101,12 +101,12 @@ final class ImageTest extends TestCase
         $this->assertEquals($this->emptyImage->default('https://example.com/image.jpg')->url('medium'), 'https://example.com/image.jpg');
     }
 
-    public function testImageAltIsCorrect()
+    public function test_image_alt_is_correct()
     {
         $this->assertEquals($this->image->alt(), 'Image Title');
     }
 
-    public function testToStringIsCorrect()
+    public function test_to_string_is_correct()
     {
         $this->assertEquals((string) $this->image, 'https://example.com/imagetitle-150x150.jpg');
         $this->assertEquals($this->emptyImage, '');

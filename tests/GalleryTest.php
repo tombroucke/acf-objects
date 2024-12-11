@@ -62,7 +62,7 @@ final class GalleryTest extends TestCase
         $this->gallery = new Gallery($this->galleryArray, null, []);
     }
 
-    public function testGalleryHasTwoImages()
+    public function test_gallery_has_two_images()
     {
         $this->assertEquals(1, count($this->gallery));
     }

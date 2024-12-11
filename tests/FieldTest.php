@@ -29,18 +29,18 @@ final class FieldTest extends TestCase
         $this->emptyField = new Field(false, 0, []);
     }
 
-    public function testValue()
+    public function test_value()
     {
         $this->assertEquals((string) $this->field, $this->value['url']);
     }
 
-    public function testValueIsCorrect()
+    public function test_value_is_correct()
     {
         $this->assertTrue($this->field->isSet());
         $this->assertFalse($this->emptyField->isSet());
     }
 
-    public function testDefaultReturnsObject()
+    public function test_default_returns_object()
     {
         $this->assertIsObject($this->field->default(['title' => 'Title', 'url' => 'https://example.com']));
     }

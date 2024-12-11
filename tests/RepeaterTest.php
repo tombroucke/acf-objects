@@ -19,7 +19,7 @@ final class RepeaterTest extends TestCase
         $this->repeater = new Repeater($this->repeaterArray, null, []);
     }
 
-    public function testRepeaterHasTwoRows()
+    public function test_repeater_has_two_rows()
     {
         $this->assertEquals(3, count($this->repeater));
     }

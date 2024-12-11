@@ -62,31 +62,31 @@ final class FileTest extends TestCase
         $this->emptyFile = new File([], null, []);
     }
 
-    public function testUrl()
+    public function test_url()
     {
         $this->assertEquals('https://example.com/imagetitle-scaled.jpg', $this->file->url());
         $this->assertNull($this->emptyFile->url());
     }
 
-    public function testTitle()
+    public function test_title()
     {
         $this->assertEquals('imagetitle', $this->file->title());
         $this->assertNull($this->emptyFile->title());
     }
 
-    public function testMimeType()
+    public function test_mime_type()
     {
         $this->assertEquals('image/jpeg', $this->file->mimeType());
         $this->assertNull($this->emptyFile->mimeType());
     }
 
-    public function testWidth()
+    public function test_width()
     {
         $this->assertEquals(2560, $this->file->width());
         $this->assertNull($this->emptyFile->width());
     }
 
-    public function testHeight()
+    public function test_height()
     {
         $this->assertEquals(638, $this->file->height());
         $this->assertNull($this->emptyFile->height());
