@@ -17,6 +17,7 @@ abstract class Field implements FieldContract
             'Method getValue() is deprecated since version 3.1.2 and will be removed in future versions. Use value() instead.',
             E_USER_DEPRECATED
         );
+
         return $this->value();
     }
 
