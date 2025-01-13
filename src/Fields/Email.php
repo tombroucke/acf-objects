@@ -8,10 +8,8 @@ class Email extends Field
 {
     use Stringable;
 
-    public function obfuscate(): Email
+    public function obfuscate(): ?string
     {
-        $this->value = $this->value ? antispambot($this->value) : null;
-
-        return $this;
+        return $this->value ? antispambot($this->value) : null;
     }
 }
