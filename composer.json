@@ -17,8 +17,7 @@
   "require": {
     "php": "^8.0",
     "nesbot/carbon": "*",
-    "illuminate/support": "*",
-    "spatie/ray": "^1.41"
+    "illuminate/support": "*"
   },
   "extra": {
     "acorn": {
