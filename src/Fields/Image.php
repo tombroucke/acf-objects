@@ -3,10 +3,12 @@
 namespace Otomaties\AcfObjects\Fields;
 
 use Otomaties\AcfObjects\Traits\Attributes;
+use Otomaties\AcfObjects\Traits\FetchesArrayValues;
 
 class Image extends Field
 {
     use Attributes;
+    use FetchesArrayValues;
 
     private function type(): string
     {
